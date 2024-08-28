@@ -18,7 +18,7 @@ import java.util.List;
 public class Event {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long eventId;
 
     private String name;
@@ -32,6 +32,8 @@ public class Event {
     @JoinColumn(name = "event_id")
     private List<Task> tasks;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    @JoinColumn(name = "event_id")
     private List<Guest> guests;
 }

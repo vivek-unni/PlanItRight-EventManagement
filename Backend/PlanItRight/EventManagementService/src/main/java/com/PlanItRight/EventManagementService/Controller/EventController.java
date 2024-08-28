@@ -1,6 +1,7 @@
 package com.PlanItRight.EventManagementService.controller;
 
 
+import com.PlanItRight.EventManagementService.exception.ResourceNotFoundException;
 import com.PlanItRight.EventManagementService.model.Event;
 import com.PlanItRight.EventManagementService.model.Task;
 import com.PlanItRight.EventManagementService.service.EventService;
@@ -36,10 +37,23 @@ public class EventController {
    {
         eventService.deleteEvent(id);
    }
-    @PostMapping("/{eventId}/tasks")
+    @PostMapping("/{eventId}/tasks/add")
     public Task addTaskToEvent(@PathVariable Long eventId, @RequestBody Task task) {
         Task createdTask = eventService.addTaskToEvent(eventId, task);
         return createdTask;
+    }
+
+    @DeleteMapping("/{eventId}/tasks/delete/{taskId}")
+    public ResponseEntity<String> deleteTaskFromEvent(@PathVariable Long eventId, @PathVariable Long taskId) throws ResourceNotFoundException {
+        eventService.deleteTaskFromEvent(eventId, taskId);
+        return ResponseEntity.ok("Task deleted successfully from event");
+    }
+
+
+    @GetMapping("/{eventId}/tasks/all")
+    public List<Task> getAllTasksFromEvent(@PathVariable Long eventId)
+    {
+        return eventService.getAllTasksFromEvent(eventId);
     }
 
 }
