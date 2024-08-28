@@ -1,6 +1,7 @@
 package com.PlanItRight.EventManagementService.exception;
 
 public class ResourceNotFoundException extends  Exception{
-    public ResourceNotFoundException(String taskNotFound) {
+    public ResourceNotFoundException(String s) {
+        super(s);
     }
 }

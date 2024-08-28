@@ -1,5 +1,6 @@
 package com.PlanItRight.EventManagementService.service;
 
+import com.PlanItRight.EventManagementService.exception.DatabaseException;
 import com.PlanItRight.EventManagementService.exception.ResourceNotFoundException;
 import com.PlanItRight.EventManagementService.model.Event;
 import com.PlanItRight.EventManagementService.model.Task;
@@ -22,50 +23,50 @@ public class EventService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public List<Event> getAllEvents() {
-        return eventRepository.findAll();
-    }
-
-    public Event addEvent(Event event) {
-        return eventRepository.save(event);
-    }
-
-    public void deleteEvent(Long id) {
-        eventRepository.deleteById(id);
-    }
-
-    public Task addTaskToEvent(Long eventId, Task task) {
-        Optional<Event> optionalEvent = eventRepository.findById(eventId);
-        if (optionalEvent.isPresent()) {
-            Event event = optionalEvent.get();
-            event.getTasks().add(task);
-            taskRepository.save(task);
-            eventRepository.save(event);
-            return task;
+    public List<Event> getAllEvents() throws DatabaseException {
+        try {
+            return eventRepository.findAll();
+        } catch (Exception e) {
+            throw new DatabaseException("An error occurred while retrieving all events.", e);
         }
-
-        return null;
     }
 
-    public void deleteTaskFromEvent(Long eventId, Long taskId) throws ResourceNotFoundException {
-        Event event = eventRepository.findById(eventId)
-                .orElseThrow(() -> new ResourceNotFoundException("Event not found"));
-
-        Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new ResourceNotFoundException("Task not found"));
-
-
-        taskRepository.delete(task); // Deletes the task
-    }
-
-    public List<Task> getAllTasksFromEvent(@PathVariable Long id)
-    {
-        Optional<Event> optionalEvent = eventRepository.findById(id);
-        if (optionalEvent.isPresent()) {
-            Event event = optionalEvent.get();
-            return event.getTasks();
+    public Event addEvent(Event event) throws DatabaseException {
+        try {
+            return eventRepository.save(event);
+        } catch (Exception e) {
+            throw new DatabaseException("An error occurred while adding the event.", e);
         }
-        return null;
-
     }
+
+    public void deleteEvent(Long id) throws ResourceNotFoundException, DatabaseException {
+        try {
+            if (!eventRepository.existsById(id)) {
+                throw new ResourceNotFoundException("Event not found with id: " + id);
+            }
+            eventRepository.deleteById(id);
+        } catch (ResourceNotFoundException e) {
+            throw e; // Let the global handler manage this
+        } catch (Exception e) {
+            throw new DatabaseException("An error occurred while deleting the event.", e);
+        }
+    }
+
+
+//    public Task addTaskToEvent(Long eventId, Task task) {
+//        Optional<Event> optionalEvent = eventRepository.findById(eventId);
+//        if (optionalEvent.isPresent()) {
+//            Event event = optionalEvent.get();
+//            event.getTasks().add(task);
+//            taskRepository.save(task);
+//            eventRepository.save(event);
+//            return task;
+//        }
+//
+//        return null;
+//    }
+
+
+
+
 }
