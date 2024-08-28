@@ -37,10 +37,11 @@ public class EventService {
         if (optionalEvent.isPresent()) {
             Event event = optionalEvent.get();
             event.getTasks().add(task);
-            task.setEvent(event);
+            taskRepository.save(task);
             eventRepository.save(event);
-            return taskRepository.save(task);
+            return task;
         }
+
         return null;
     }
 }

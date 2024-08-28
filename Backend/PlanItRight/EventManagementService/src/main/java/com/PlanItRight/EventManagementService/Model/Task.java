@@ -25,9 +25,11 @@ public class Task {
     private Date dueDate;
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "event_id", nullable = false)
-    private Event event;
+//    @ManyToOne(fetch = FetchType.LAZY)
+////    @JoinColumn(name = "event_id", nullable = false)
+//    @JoinColumn(name = "event_id", nullable = false)
+//
+//    private Event event;
 
 
 }

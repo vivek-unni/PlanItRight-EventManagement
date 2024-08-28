@@ -37,12 +37,9 @@ public class EventController {
         eventService.deleteEvent(id);
    }
     @PostMapping("/{eventId}/tasks")
-    public ResponseEntity<Task> addTaskToEvent(@PathVariable Long eventId, @RequestBody Task task) {
+    public Task addTaskToEvent(@PathVariable Long eventId, @RequestBody Task task) {
         Task createdTask = eventService.addTaskToEvent(eventId, task);
-        if (createdTask != null) {
-            return ResponseEntity.ok(createdTask);
-        }
-        return ResponseEntity.notFound().build();
+        return createdTask;
     }
 
 }
