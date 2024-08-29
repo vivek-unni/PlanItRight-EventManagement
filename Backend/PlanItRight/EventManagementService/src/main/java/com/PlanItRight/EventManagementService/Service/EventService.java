@@ -52,6 +52,12 @@ public class EventService {
         }
     }
 
+    public Event getEventById(Long id) throws ResourceNotFoundException {
+        return eventRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + id));
+    }
+
+
 
 //    public Task addTaskToEvent(Long eventId, Task task) {
 //        Optional<Event> optionalEvent = eventRepository.findById(eventId);

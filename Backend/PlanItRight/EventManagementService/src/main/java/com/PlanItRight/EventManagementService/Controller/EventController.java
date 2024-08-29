@@ -24,11 +24,6 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-    @Autowired
-    private GuestService guestService;
-
-    @Autowired
-    private TaskService taskService;
 
    @GetMapping()
     public List<Event> getAllEvents() throws DatabaseException {
@@ -40,16 +35,14 @@ public class EventController {
        return eventService.addEvent(event);
    }
 
+   @GetMapping("/{eventId}")
+   public Event getEventById(@PathVariable Long eventId) throws ResourceNotFoundException {
+       return eventService.getEventById(eventId);
+   }
+
    @DeleteMapping("/deleteEvent/{id}")
     public void deleteEvent(@PathVariable Long id) throws ResourceNotFoundException, DatabaseException {
         eventService.deleteEvent(id);
    }
-
-
-
-
-
-
-
 
 }
