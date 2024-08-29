@@ -15,18 +15,11 @@ export class EventPopupComponent {
   eventName: string = '';
   eventDate: string = '';
   eventLocation: string = '';
-  selectedFile: File | null = null;
+  eventDescription: string = '';
+  eventType: string = '';
 
   onClose(): void {
     this.closePopup.emit();
-  }
-
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      this.selectedFile = file;
-      console.log('File selected:', this.selectedFile);
-    }
   }
 
   onSubmit(): void {
@@ -35,12 +28,13 @@ export class EventPopupComponent {
         eventName: this.eventName,
         eventDate: this.eventDate,
         eventLocation: this.eventLocation,
-        guestListFile: this.selectedFile
+        eventDescription: this.eventDescription,
+        eventType:this.eventType
       };
 
       console.log('Event Data:', eventData);
 
-      this.onClose(); // Close the popup after submission
+      this.onClose(); 
     } else {
       alert('Please fill in all required fields');
     }
