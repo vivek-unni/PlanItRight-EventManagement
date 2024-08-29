@@ -30,7 +30,7 @@ public class BudgetService {
         }
 
 
-        throw new IllegalArgumentException("Event with ID " + eventId + " not found.");
+        throw new IllegalArgumentException("Event with this ID " + eventId + " not found.");
     }
 
     public Optional<Budget> getBudgetByEventId(Long eventId) {
