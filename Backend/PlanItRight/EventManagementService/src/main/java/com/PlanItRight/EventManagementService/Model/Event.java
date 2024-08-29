@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import java.util.Date;
 import java.util.List;
@@ -17,8 +18,8 @@ import java.util.List;
 public class Event {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long eventId;
 
     private String name;
     private String description;
@@ -26,9 +27,13 @@ public class Event {
     private String location;
     private String type;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    @JoinColumn(name = "event_id")
     private List<Task> tasks;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    @JoinColumn(name = "event_id")
     private List<Guest> guests;
 }

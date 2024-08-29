@@ -1,9 +1,14 @@
 package com.PlanItRight.EventManagementService.controller;
 
 
+import com.PlanItRight.EventManagementService.exception.DatabaseException;
+import com.PlanItRight.EventManagementService.exception.ResourceNotFoundException;
 import com.PlanItRight.EventManagementService.model.Event;
+import com.PlanItRight.EventManagementService.model.Guest;
 import com.PlanItRight.EventManagementService.model.Task;
 import com.PlanItRight.EventManagementService.service.EventService;
+import com.PlanItRight.EventManagementService.service.GuestService;
+import com.PlanItRight.EventManagementService.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,30 +24,32 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
+    @Autowired
+    private GuestService guestService;
+
+    @Autowired
+    private TaskService taskService;
+
    @GetMapping()
-    public List<Event> getAllEvents()
-   {
+    public List<Event> getAllEvents() throws DatabaseException {
        return eventService.getAllEvents();
    }
 
    @PostMapping("/addEvent")
-    public Event addEvent(@RequestBody Event event)
-   {
+    public Event addEvent(@RequestBody Event event) throws DatabaseException {
        return eventService.addEvent(event);
    }
 
    @DeleteMapping("/deleteEvent/{id}")
-    public void deleteEvent(@PathVariable Long id)
-   {
+    public void deleteEvent(@PathVariable Long id) throws ResourceNotFoundException, DatabaseException {
         eventService.deleteEvent(id);
    }
-    @PostMapping("/{eventId}/tasks")
-    public ResponseEntity<Task> addTaskToEvent(@PathVariable Long eventId, @RequestBody Task task) {
-        Task createdTask = eventService.addTaskToEvent(eventId, task);
-        if (createdTask != null) {
-            return ResponseEntity.ok(createdTask);
-        }
-        return ResponseEntity.notFound().build();
-    }
+
+
+
+
+
+
+
 
 }

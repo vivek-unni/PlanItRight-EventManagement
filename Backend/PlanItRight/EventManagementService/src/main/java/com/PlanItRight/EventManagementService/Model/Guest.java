@@ -14,18 +14,17 @@ public class Guest {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String name;
     private String email;
     private String rsvpStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "event_id", nullable = false)
-    private Event event;
 
-
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "event_id", nullable = false)
+//    private Event event;
 }
 
 
