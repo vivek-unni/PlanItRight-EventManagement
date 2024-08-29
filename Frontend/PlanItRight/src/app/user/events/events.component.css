@@ -9,6 +9,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     padding: 30px;
+    display: flex;
+    flex-direction: column;
 }
 
 main {
@@ -142,19 +144,9 @@ main {
     visibility: hidden;
 }
 
-#navbar-menu.sidebar,
-#navbar-menu.sidebar.left {
-    left: -1000px;
-    right: 0;
-}
 
-#navbar-menu.sidebar.right {
-    right: -1000px;
-    left: 0;
-}
 
-#navbar-menu.detached,
-#navbar-menu.attached {
+#navbar-menu.detached{
     left: 0;
     right: 0;
 }
@@ -163,14 +155,6 @@ main {
     background-color: rgba(0, 0, 0, 0.4);
     opacity: 1;
     visibility: visible;
-}
-
-#navbar.opened #navbar-menu.sidebar.left {
-    left: 0;
-}
-
-#navbar.opened #navbar-menu.sidebar.right {
-    right: 0;
 }
 
 .navbar-links {
@@ -194,17 +178,6 @@ main {
     bottom: 0;
 }
 
-.left.sidebar .navbar-links {
-    left: 0;
-    right: unset;
-    box-shadow: 5px 20px 20px rgba(0, 0, 0, 0.3);
-}
-
-.right.sidebar .navbar-links {
-    right: 0;
-    left: unset;
-    box-shadow: -5px 20px 20px rgba(0, 0, 0, 0.3);
-}
 
 .detached .navbar-links {
     left: 0;
@@ -214,11 +187,6 @@ main {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-.attached .navbar-links {
-    left: 0;
-    right: 0;
-    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
-}
 
 .navbar-item {
     margin: 0.4em;
@@ -260,4 +228,82 @@ main {
 #options {
     display: flex;
     flex-direction: column;
+}
+
+
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    align-items: center;
+    justify-content: center;
+    /* height: 60vh; */
+    margin: 0 30px;
+}
+
+.profile-card {
+    flex: 1 1 30%;
+    max-width: 300px;
+    background: #fff;
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 4px;
+    box-shadow: 0 0 2px 0 #ccc;
+    transition: .3s;
+}
+
+.profile-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px -5px #ccc;
+}
+
+.profile-icon {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 25px 0 10px 0;
+}
+
+.profile-position {
+    font-size: 14px;
+    color: #777;
+}
+
+.button {
+    margin: 40px 0 0 0;
+    padding: 10px 30px;
+    color: #999;
+    text-decoration: none;
+    border: 1px solid #999;
+    border-radius: 4px;
+}
+
+.button:hover {
+    color: #fff;
+    background: #748dff;
+    border: 1px solid #748dff;
+}
+
+@media screen and (max-width: 1000px) {
+    .profile-name {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .profile-card {
+        padding: 20px 15px;
+    }
+
+    .profile-name {
+        font-size: 16px;
+    }
 }
