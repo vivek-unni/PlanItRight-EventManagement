@@ -1,2 +1,4 @@
-package com.PlanItRight.VendorAndBudgetManagement.controller;public class PaymentController {
+package com.PlanItRight.VendorAndBudgetManagement.controller;
+
+public class PaymentController {
 }

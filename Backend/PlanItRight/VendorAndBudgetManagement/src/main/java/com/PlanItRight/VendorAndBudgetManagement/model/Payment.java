@@ -18,7 +18,7 @@ public class Payment {
     private Long eventId;
 
     private Double amount;
-    private LocalDate paymentDate;
+    private LocalDate dueDate;
     private String status;
 }
 

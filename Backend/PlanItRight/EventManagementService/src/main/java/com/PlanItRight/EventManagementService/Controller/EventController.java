@@ -36,8 +36,8 @@ public class EventController {
    }
 
    @GetMapping("/{eventId}")
-   public Event getEventById(@PathVariable Long id) throws ResourceNotFoundException {
-       return eventService.getEventById(id);
+   public Event getEventById(@PathVariable Long eventId) throws ResourceNotFoundException {
+       return eventService.getEventById(eventId);
    }
 
    @DeleteMapping("/deleteEvent/{id}")

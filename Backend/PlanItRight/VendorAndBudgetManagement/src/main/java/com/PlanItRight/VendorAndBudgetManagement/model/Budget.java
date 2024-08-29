@@ -14,7 +14,7 @@ public class Budget {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(nullable = false)
+
     private Long eventId;
 
     private Double allocatedBudget;
