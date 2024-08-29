@@ -1,0 +1,53 @@
+package com.PlanItRight.VendorAndBudgetManagement.controller;
+
+;
+import com.PlanItRight.VendorAndBudgetManagement.model.Vendor;
+import com.PlanItRight.VendorAndBudgetManagement.service.VendorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/vendors")
+public class VendorController {
+
+    @Autowired
+    private VendorService vendorService;
+
+
+    @PostMapping("/add")
+    public ResponseEntity<Vendor> addVendor(@RequestBody Vendor vendor) {
+        Vendor createdVendor = vendorService.addVendor(vendor);
+        return ResponseEntity.ok(createdVendor);
+    }
+
+
+    @PutMapping("/{vendorId}")
+    public ResponseEntity<Vendor> updateVendor(@PathVariable Long vendorId, @RequestBody Vendor vendor) {
+        Vendor updatedVendor = vendorService.updateVendor(vendorId, vendor);
+        return updatedVendor != null ? ResponseEntity.ok(updatedVendor) : ResponseEntity.notFound().build();
+    }
+
+
+    @PutMapping("/{vendorId}/deactivate")
+    public ResponseEntity<Void> deactivateVendor(@PathVariable Long vendorId) {
+        vendorService.deactivateVendor(vendorId);
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @GetMapping("/{vendorId}")
+    public ResponseEntity<Vendor> getVendorById(@PathVariable Long vendorId) {
+        Optional<Vendor> vendor = vendorService.getVendorById(vendorId);
+        return vendor.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+
+    @GetMapping
+    public ResponseEntity<List<Vendor>> getAllVendors() {
+        return ResponseEntity.ok(vendorService.getAllVendors());
+    }
+}
