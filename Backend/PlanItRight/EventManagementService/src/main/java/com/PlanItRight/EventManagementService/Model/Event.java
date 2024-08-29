@@ -27,6 +27,7 @@ public class Event {
     private String location;
     private String type;
 
+
     @OneToMany
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "event_id")

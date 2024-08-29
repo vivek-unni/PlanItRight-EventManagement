@@ -1,6 +1,7 @@
 package com.PlanItRight.VendorAndBudgetManagement.controller;
 
 ;
+import com.PlanItRight.VendorAndBudgetManagement.exception.EventNotFoundException;
 import com.PlanItRight.VendorAndBudgetManagement.model.Vendor;
 import com.PlanItRight.VendorAndBudgetManagement.service.VendorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,21 +27,21 @@ public class VendorController {
 
 
     @PutMapping("/{vendorId}")
-    public ResponseEntity<Vendor> updateVendor(@PathVariable Long vendorId, @RequestBody Vendor vendor) {
+    public ResponseEntity<Vendor> updateVendor(@PathVariable Long vendorId, @RequestBody Vendor vendor) throws EventNotFoundException {
         Vendor updatedVendor = vendorService.updateVendor(vendorId, vendor);
         return updatedVendor != null ? ResponseEntity.ok(updatedVendor) : ResponseEntity.notFound().build();
     }
 
 
     @PutMapping("/{vendorId}/deactivate")
-    public ResponseEntity<Void> deactivateVendor(@PathVariable Long vendorId) {
+    public ResponseEntity<Void> deactivateVendor(@PathVariable Long vendorId) throws EventNotFoundException {
         vendorService.deactivateVendor(vendorId);
         return ResponseEntity.noContent().build();
     }
 
 
     @GetMapping("/{vendorId}")
-    public ResponseEntity<Vendor> getVendorById(@PathVariable Long vendorId) {
+    public ResponseEntity<Vendor> getVendorById(@PathVariable Long vendorId) throws EventNotFoundException {
         Optional<Vendor> vendor = vendorService.getVendorById(vendorId);
         return vendor.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
