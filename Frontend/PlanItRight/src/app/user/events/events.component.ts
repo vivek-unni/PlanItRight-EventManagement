@@ -1,9 +1,11 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { EventPopupComponent } from "../event-popup/event-popup.component";
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-events',
   standalone: true,
-  imports: [],
+  imports: [EventPopupComponent,NgIf],
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.css'] // Corrected 'styleUrl' to 'styleUrls'
 })
@@ -51,4 +53,21 @@ export class EventsComponent implements AfterViewInit {
         });
       });
   }
+
+  create_icon:string='/assets/icons8-create-90.png';
+  calender_icon:string='/assets/icons8-calender-100.png';
+  location_icon:string='/assets/icons8-location-100.png';
+
+  isPopupOpen = false;
+
+  constructor() {}
+
+  openPopup(): void {
+    this.isPopupOpen = true;
+  }
+
+  closePopup(): void {
+    this.isPopupOpen = false;
+  }
+
 }

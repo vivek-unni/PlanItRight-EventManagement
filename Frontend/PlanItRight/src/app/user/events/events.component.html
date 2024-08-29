@@ -1,5 +1,5 @@
 <header id="navbar">
-  <nav class="navbar-container container ">
+  <nav class="navbar-container container">
     <a href="/" class="home-link">
       PlanItRight.
     </a>
@@ -17,29 +17,44 @@
   </nav>
 </header>
 
-
-
 <body>
-  <h2 class="title-event" style="padding: 40px;">Your Events</h2>
+  <div class="create-icon">
+    <h2 class="title-event" style="padding: 30px;">Your Events</h2>
+    <a href="javascript:void(0)" (click)="openPopup()"><img src="{{create_icon}}" alt="img" id="create-icon"></a>
+  </div>
+
+  <div class="wrap" style="justify-content: center;">
+    <div class="search" style="justify-content: center;">
+      <input type="text" class="searchTerm" placeholder="Search...">
+      <button type="submit" class="searchButton">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+  </div>
+  
   <div class="profile-container">
-    <div class="profile-card">
-      <img src="https://i.imgur.com/bZBG9PE.jpg" alt="image1" class="profile-icon" />
-      <div class="profile-name">Kelly Seikma</div>
-      <div class="profile-position">Web Designer</div>
-      <a href="#" class="button">Connect</a>
+    <div class="event-card">
+      <div class="event-name">Tech Innovators Conference 2024</div>
+      <div class="event-date"><img src="{{calender_icon}}" alt="img" style="height: 25px;padding-right: 15px;">September 30, 2024</div>
+      <div class="event-location"><img src="{{location_icon}}" alt="img" style="height: 25px;padding-right: 15px;">Silicon Valley Convention Center, CA</div>
+      <a href="#" class="button">Open</a>
     </div>
-    <div class="profile-card">
-      <img src="https://i.imgur.com/S4GNFIW.jpg" alt="image2" class="profile-icon" />
-      <div class="profile-name">Mabel Maxwell</div>
-      <div class="profile-position">Web Developer</div>
-      <a href="#" class="button">Connect</a>
+
+    <div class="event-card">
+      <div class="event-name">Tech Innovators Conference 2024</div>
+      <div class="event-date"><img src="{{calender_icon}}" alt="img" style="height: 25px;padding-right: 15px;">September 30, 2024</div>
+      <div class="event-location"><img src="{{location_icon}}" alt="img" style="height: 25px;padding-right: 15px;">Silicon Valley Convention Center, CA</div>
+      <a href="#" class="button">Open</a>
     </div>
-    <div class="profile-card">
-      <img src="https://i.imgur.com/cMSVQZC.jpg" alt="image3" class="profile-icon" />
-      <div class="profile-name">Danny Liswell</div>
-      <div class="profile-position">DevOps</div>
-      <a href="#" class="button">Connect</a>
+
+    <div class="event-card">
+      <div class="event-name">Tech Innovators Conference 2024</div>
+      <div class="event-date"><img src="{{calender_icon}}" alt="img" style="height: 25px;padding-right: 15px;">September 30, 2024</div>
+      <div class="event-location"><img src="{{location_icon}}" alt="img" style="height: 25px;padding-right: 15px;">Silicon Valley Convention Center, CA</div>
+      <a href="#" class="button">Open</a>
     </div>
   </div>
 
+  <!-- Event Popup Component -->
+  <app-event-popup *ngIf="isPopupOpen" (closePopup)="closePopup()"></app-event-popup>
 </body>
