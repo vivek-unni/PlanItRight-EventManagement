@@ -39,6 +39,12 @@ public class VendorController {
     }
 
 
+    @PutMapping("/{vendorId}/activate")
+    public ResponseEntity<Void> activateVendor(@PathVariable Long vendorId) throws VendorNotFoundException {
+        vendorService.activateVendor(vendorId);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/{vendorId}")
     public ResponseEntity<Vendor> getVendorById(@PathVariable Long vendorId) throws VendorNotFoundException {
         Optional<Vendor> vendor = vendorService.getVendorById(vendorId);

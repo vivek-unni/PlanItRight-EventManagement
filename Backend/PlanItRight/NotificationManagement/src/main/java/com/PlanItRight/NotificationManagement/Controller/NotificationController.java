@@ -12,7 +12,7 @@ public class NotificationController {
     @Autowired
     private NotificationService notificationService;
 
-    @PostMapping("/sendEmail/notification/eventId={eventId}/guestId={guestId}")
+    @PostMapping("/sendEmail/eventId={eventId}/guestId={guestId}")
     public String sendEmail(@RequestBody Notification notification , @PathVariable Long guestId , @PathVariable Long eventId){
 
         notificationService.sendEmailToGuest(notification , guestId , eventId);

@@ -41,6 +41,13 @@ public class VendorService {
                 .orElseThrow(() -> new VendorNotFoundException("Vendor with ID " + vendorId + " not found.")));
     }
 
+    public void activateVendor(Long vendorId) throws VendorNotFoundException {
+        Vendor vendor = vendorRepository.findById(vendorId)
+                .orElseThrow(() -> new VendorNotFoundException("Vendor with ID " + vendorId + " not found."));
+        vendor.setStatus("active");
+        vendorRepository.save(vendor);
+    }
+
     public List<Vendor> getAllVendors() {
         return vendorRepository.findAll();
     }
