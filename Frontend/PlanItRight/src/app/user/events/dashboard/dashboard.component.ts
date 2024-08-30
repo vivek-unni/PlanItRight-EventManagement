@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { EventNavComponent } from "../event-nav/event-nav.component";
 import { BudgetVendorsSubComponent } from "./budget-vendors-sub/budget-vendors-sub.component";
 import { GuestlistSubComponent } from "./guestlist-sub/guestlist-sub.component";
+import { ScheduleSubComponent } from "./schedule-sub/schedule-sub.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [EventNavComponent, BudgetVendorsSubComponent, GuestlistSubComponent],
+  imports: [EventNavComponent, BudgetVendorsSubComponent, GuestlistSubComponent, ScheduleSubComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
