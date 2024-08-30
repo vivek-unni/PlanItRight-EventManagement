@@ -1,10 +1,9 @@
 package com.PlanItRight.NotificationManagement.Controller;
 
+import com.PlanItRight.NotificationManagement.Model.Notification;
 import com.PlanItRight.NotificationManagement.Service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/notification")
@@ -13,10 +12,10 @@ public class NotificationController {
     @Autowired
     private NotificationService notificationService;
 
-    @GetMapping("/sendEmail")
-    public String sendEmail(){
+    @PostMapping("/sendEmail/notification/eventId={eventId}/guestId={guestId}")
+    public String sendEmail(@RequestBody Notification notification , @PathVariable Long guestId , @PathVariable Long eventId){
 
-        notificationService.sendEmail("bjornironside176@gmail.com","Testing","Testing");
+        notificationService.sendEmailToGuest(notification , guestId , eventId);
         return "Success";
     }
 }

@@ -1,6 +1,4 @@
 package com.PlanItRight.VendorAndBudgetManagement.controller;
-
-;
 import com.PlanItRight.VendorAndBudgetManagement.exception.EventNotFoundException;
 import com.PlanItRight.VendorAndBudgetManagement.exception.VendorNotFoundException;
 import com.PlanItRight.VendorAndBudgetManagement.model.Vendor;
