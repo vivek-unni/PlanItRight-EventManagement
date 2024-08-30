@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Montserrat", system-ui;
+    font-optical-sizing: auto;
+    font-style: normal;
+    background-color: rgb(240, 245, 255);
+
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.rank-vendor-list-pane{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: center; */
+    margin: 10px 30px;
+    padding: 50px 100px 50px 30px;
+    background-color: rgb(240, 245, 255);
+    border-radius: 30px;
+    font-family: "Montserrat", system-ui;
+    font-optical-sizing: auto;
+    font-style: normal;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.rank-vendor-list-pane:hover {
+    background-color: rgb(230, 240, 255);
+    font-family: "Montserrat", system-ui;
+    font-optical-sizing: auto;
+    font-style: normal;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+.vendor-list{
+    justify-content: center;
+    align-items: center;
+    margin-left: 40px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  thead {
+    background-color: #c485ff96;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #9bcdff62;
+  }

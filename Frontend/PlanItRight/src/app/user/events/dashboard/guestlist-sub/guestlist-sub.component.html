@@ -1,1 +1,35 @@
-<p>guestlist-sub works!</p>
+<body>
+    <a href="">
+        <div class="guest-list-pane">
+            <div class="accept-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Guest Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let guest of getAcceptedGuests()">
+                            <td>{{ guest.name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="reject-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Guest Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let guest of getRejectedGuests()">
+                            <td>{{ guest.name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </a>
+</body>

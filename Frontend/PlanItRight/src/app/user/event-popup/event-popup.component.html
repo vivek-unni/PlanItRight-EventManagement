@@ -24,6 +24,11 @@
           </div>
 
           <div class="form-group">
+            <label for="eventBudget">Budget</label>
+            <input type="text" id="eventBudget" name="eventBudget" [(ngModel)]="eventBudget" required>
+          </div>
+
+          <div class="form-group">
             <label for="eventType">Type</label>
             <select id="eventType" name="eventType" [(ngModel)]="eventType" required>
               <option value="" disabled selected>Select an event type</option>

@@ -16,6 +16,7 @@ export class EventPopupComponent {
   eventDate: string = '';
   eventLocation: string = '';
   eventDescription: string = '';
+  eventBudget:number = 0;
   eventType: string = '';
 
   onClose(): void {
@@ -29,6 +30,7 @@ export class EventPopupComponent {
         eventDate: this.eventDate,
         eventLocation: this.eventLocation,
         eventDescription: this.eventDescription,
+        eventBudget:this.eventBudget,
         eventType:this.eventType
       };
 

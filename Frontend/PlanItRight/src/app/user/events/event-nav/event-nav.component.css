@@ -19,7 +19,7 @@
   }
   
   #navbar {
-    position: fixed;
+    /* position: fixed; */
     height: 64px; /* Fixed height */
     background-color: hsl(0, 0%, 15%); /* Background color */
     left: 0;
