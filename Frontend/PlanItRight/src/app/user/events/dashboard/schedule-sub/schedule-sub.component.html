@@ -1,1 +1,23 @@
-<p>schedule-sub works!</p>
+<body>
+    <a href="">
+    <div class="schedule-table">
+        <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Due Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let schedule of getVisibleSchedules()" [ngClass]="getStatusClass(schedule.status)">
+                <td>{{ schedule.name }}</td>
+                <td>{{ getFormattedDate(schedule.dueDate) }}</td>
+                <td>{{ schedule.status }}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </a>
+      
+</body>
