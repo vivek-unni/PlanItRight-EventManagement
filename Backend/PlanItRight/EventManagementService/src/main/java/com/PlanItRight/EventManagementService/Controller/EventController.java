@@ -25,7 +25,7 @@ public class EventController {
     private EventService eventService;
 
 
-   @GetMapping()
+   @GetMapping("/all")
     public List<Event> getAllEvents() throws DatabaseException {
        return eventService.getAllEvents();
    }

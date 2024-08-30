@@ -1,6 +1,4 @@
 package com.PlanItRight.VendorAndBudgetManagement.controller;
-
-;
 import com.PlanItRight.VendorAndBudgetManagement.exception.EventNotFoundException;
 import com.PlanItRight.VendorAndBudgetManagement.exception.VendorNotFoundException;
 import com.PlanItRight.VendorAndBudgetManagement.model.Vendor;
@@ -40,6 +38,12 @@ public class VendorController {
         return ResponseEntity.noContent().build();
     }
 
+
+    @PutMapping("/{vendorId}/activate")
+    public ResponseEntity<Void> activateVendor(@PathVariable Long vendorId) throws VendorNotFoundException {
+        vendorService.activateVendor(vendorId);
+        return ResponseEntity.noContent().build();
+    }
 
     @GetMapping("/{vendorId}")
     public ResponseEntity<Vendor> getVendorById(@PathVariable Long vendorId) throws VendorNotFoundException {
