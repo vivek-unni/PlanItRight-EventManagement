@@ -1,0 +1,29 @@
+server:
+  port: 5000
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: EventManagementService
+          uri: http://localhost:7001
+          predicates:
+            - Path=/api/guests/** , /api/guests/** , /api/tasks/**
+        - id: BudgetAndVendorManagement
+          uri: http://localhost:7002
+          predicates:
+            - Path=/api/budgets/**, /api/payments/**, /api/vendors/**
+        - id: NotificationManagement
+          uri: http://localhost:7003
+          predicates:
+            - Path=/api/notifications/**
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
