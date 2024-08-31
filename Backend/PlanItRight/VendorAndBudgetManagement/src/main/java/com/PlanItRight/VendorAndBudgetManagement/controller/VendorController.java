@@ -52,7 +52,7 @@ public class VendorController {
     }
 
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Vendor>> getAllVendors() {
         return ResponseEntity.ok(vendorService.getAllVendors());
     }
