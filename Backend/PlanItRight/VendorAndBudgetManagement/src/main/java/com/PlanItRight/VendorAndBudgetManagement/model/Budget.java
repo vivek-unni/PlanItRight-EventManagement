@@ -16,7 +16,6 @@ public class Budget {
 
 
     private Long eventId;
-
     private Double allocatedBudget;
     private Double actualSpent;
 }
