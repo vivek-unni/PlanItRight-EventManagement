@@ -20,13 +20,13 @@ public class Payment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vendor_id")
     @JsonIgnore
-    private Vendor vendor;
+            private Vendor vendor;
 
-    @Column(nullable = false)
-    private Long eventId;
+            @Column(nullable = false)
+            private Long eventId;
 
-    private Double amount;
-    private LocalDate dueDate;
-    private String status;
+            private Double amount;
+            private LocalDate dueDate;
+            private String status;
 }
 

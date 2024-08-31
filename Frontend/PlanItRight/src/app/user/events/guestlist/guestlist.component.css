@@ -108,6 +108,16 @@ body {
     transform: scale(1.1);
 }
 
+.add-guest{
+    width: 38px;
+    transition: transform 0.3s ease;
+    /* padding-left: 10px; */
+}
+
+.add-guest:hover {
+    transform: scale(1.1);
+}
+
 .accept-list,
 .reject-list,
 .no-reply-list {

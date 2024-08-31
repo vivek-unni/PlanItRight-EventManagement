@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { EventNavComponent } from "../event-nav/event-nav.component";
 import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
+import { AddGuestComponent } from "./add-guest/add-guest.component";
 
 @Component({
   selector: 'app-guestlist',
   standalone: true,
-  imports: [EventNavComponent, NgFor, CommonModule,FormsModule],
+  imports: [EventNavComponent, NgFor, CommonModule, FormsModule, AddGuestComponent],
   templateUrl: './guestlist.component.html',
   styleUrl: './guestlist.component.css'
 })
@@ -104,4 +105,19 @@ export class GuestlistComponent implements OnInit {
 
   getNoReplyGuests(): any[] {
     return this.filteredNoReplyGuests;
-  }}
+  }
+
+  //POPUP ADD GUEST
+
+  isPopupOpen = false;
+
+
+  openPopup(): void {
+    this.isPopupOpen = true;
+  }
+
+  closePopup(): void {
+    this.isPopupOpen = false;
+  }
+  
+}

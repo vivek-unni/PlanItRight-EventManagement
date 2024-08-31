@@ -9,13 +9,14 @@
           <!-- <i class="fa fa-search"></i> -->
         </button>
       </div>
-      <a href=""><img src="/assets/icons8-send-100.png" alt="" class="send-icon" title="Send RSVPs"></a>
+      <a href="javascript:void(0)" (click)="openPopup()"><img src="/assets/icons8-add-user-96.png" class="add-guest" alt="" title="Add Guest"></a>
+      <!-- <a href=""><img src="/assets/icons8-send-100.png" alt="" class="send-icon" title="Send RSVPs"></a> -->
     </div>
 
     <div class="guest-list-pane">
       <div class="accept-list">
         <h4><strong>Accepted</strong></h4>
-        <table>
+        <table> 
           <tbody>
             <tr *ngFor="let guest of filteredAcceptedGuests">
               <td>{{ guest.name }}</td>
@@ -53,4 +54,7 @@
       </div>
     </div>
   </div>
+
+  <app-add-guest *ngIf="isPopupOpen" (closePopup)="closePopup()"></app-add-guest>
+
 </body>

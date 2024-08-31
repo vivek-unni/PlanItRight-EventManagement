@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './event-popup.component.css'
 })
 export class EventPopupComponent {
+  
   @Output() closePopup = new EventEmitter<void>();
 
   eventName: string = '';
