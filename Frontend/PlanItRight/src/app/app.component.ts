@@ -5,11 +5,12 @@ import { EventsComponent } from "./user/events/events.component";
 import { DashboardComponent } from "./user/events/dashboard/dashboard.component";
 import { GuestlistComponent } from "./user/events/guestlist/guestlist.component";
 import { BudgetVendorsComponent } from "./user/events/budget-vendors/budget-vendors.component";
+import { ScheduleComponent } from "./user/events/schedule/schedule.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomepageComponent, EventsComponent, DashboardComponent, GuestlistComponent, BudgetVendorsComponent],
+  imports: [RouterOutlet, HomepageComponent, EventsComponent, DashboardComponent, GuestlistComponent, BudgetVendorsComponent, ScheduleComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
