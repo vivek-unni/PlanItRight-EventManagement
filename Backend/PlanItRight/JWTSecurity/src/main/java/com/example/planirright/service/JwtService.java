@@ -1,4 +1,4 @@
-package com.example.wellnesshub.service;
+package com.example.planirright.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -13,7 +13,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY = "wellnesshubust"; // Use a consistent and secure secret key
+    private static final String SECRET_KEY = "planitright"; // Use a consistent and secure secret key
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);

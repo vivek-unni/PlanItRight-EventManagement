@@ -1,4 +1,4 @@
-package com.example.wellnesshub.exception;
+package com.example.planirright.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

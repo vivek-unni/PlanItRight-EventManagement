@@ -1,7 +1,7 @@
-package com.example.wellnesshub.config;
+package com.example.planirright.config;
 
-import com.example.wellnesshub.service.JwtService;
-import com.example.wellnesshub.service.UserDetailsServiceImpl;
+import com.example.planirright.service.JwtService;
+import com.example.planirright.service.UserDetailsServiceImpl;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

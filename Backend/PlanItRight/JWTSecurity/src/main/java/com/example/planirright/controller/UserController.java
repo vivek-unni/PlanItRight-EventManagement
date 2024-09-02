@@ -1,11 +1,8 @@
-package com.example.wellnesshub.controller;
+package com.example.planirright.controller;
 
-import com.example.wellnesshub.model.CalorieCalculator;
-import com.example.wellnesshub.model.CaloriesToBeBurned;
-import com.example.wellnesshub.model.Diet;
-import com.example.wellnesshub.model.User;
-import com.example.wellnesshub.service.UserService;
-import com.example.wellnesshub.service.JwtService;
+import com.example.planirright.model.AppUser;
+import com.example.planirright.service.UserService;
+import com.example.planirright.service.JwtService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,31 +28,12 @@ public class UserController {
     private JwtService jwtService;
 
     @PostMapping("/register")
-    public ResponseEntity<Map<String, String>> registerUser(@RequestBody User user) {
+    public ResponseEntity<Map<String, String>> registerUser(@RequestBody AppUser user) {
         try {
             userService.registerUser(user);
             Map<String, String> response = new HashMap<>();
             response.put("message", "User registered successfully");
-            
-            int[] data = CalorieCalculator.calculateCaloriesIntake(user);
-            
-            int caloriesIntake = data[0];
-            int caloriesToBeBurned = data[1];
-            int activityLevel = data[2];
-            
-            Diet diet = new Diet();
-            diet.setUserId(user.getId());
-            diet.setCaloriesIntake(caloriesIntake); // Default value
-            diet.setDietaryPreference(user.getDietaryPreference());
-            
-            CaloriesToBeBurned fitness = new CaloriesToBeBurned();
-            fitness.setUserId(user.getId());
-            fitness.setCaloriesToBeBurned(caloriesToBeBurned); // Default value
-            fitness.setActivityLevel(activityLevel);
-            
-            
-            restTemplate.postForObject("http://localhost:8081/DietPlanner/api/diets", diet, Diet.class);
-            restTemplate.postForObject("http://localhost:8081/fitness/api/caloriesToBeBurned", fitness, CaloriesToBeBurned.class);
+
             return ResponseEntity.ok(response);
 
         } 
@@ -73,13 +51,13 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody User user) {
+    public ResponseEntity<Map<String, Object>> login(@RequestBody AppUser appUser) {
         Map<String, Object> response = new HashMap<>();
         
-        if (userService.authenticate(user.getUsername(), user.getPassword())) {
-            String token = jwtService.generateToken(user.getUsername());
+        if (userService.authenticate(appUser.getUsername(), appUser.getPassword())) {
+            String token = jwtService.generateToken(appUser.getUsername());
             response.put("token", token); // Include the token in the response
-            response.put("user",userService.getUserByUsername(user.getUsername()));
+            response.put("user",userService.getUserByUsername(appUser.getUsername()));
             return ResponseEntity.ok(response);
         } else {
             response.put("error", "Invalid credentials");

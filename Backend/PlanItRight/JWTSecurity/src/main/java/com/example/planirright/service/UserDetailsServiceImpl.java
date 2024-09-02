@@ -1,7 +1,7 @@
-package com.example.wellnesshub.service;
+package com.example.planirright.service;
 
-import com.example.wellnesshub.model.User;
-import com.example.wellnesshub.repository.UserRepository;
+import com.example.planirright.model.AppUser;
+import com.example.planirright.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,13 +16,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
+        AppUser appUser = userRepository.findByUsername(username);
+        if (appUser == null) {
             throw new UsernameNotFoundException("User not found");
         }
         return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getUsername())
-                .password(user.getPassword())
+                .username(appUser.getUsername())
+                .password(appUser.getPassword())
                 .authorities("USER")
                 .build();
     }

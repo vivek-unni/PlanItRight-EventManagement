@@ -1,13 +1,10 @@
-package com.example.wellnesshub.service;
+package com.example.planirright.service;
 
-import com.example.wellnesshub.model.User;
-import com.example.wellnesshub.repository.UserRepository;
-
-import java.util.Optional;
+import com.example.planirright.model.AppUser;
+import com.example.planirright.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,29 +17,29 @@ public class UserService {
     private BCryptPasswordEncoder passwordEncoder;
 
     public boolean authenticate(String username, String password) {
-        User user = userRepository.findByUsername(username);
+        AppUser user = userRepository.findByUsername(username);
         if (user != null) {
             return passwordEncoder.matches(password, user.getPassword());
         }
         return false;
     }
 
-    public void registerUser(User user) {
-        if (userRepository.existsByUsername(user.getUsername())) {
+    public void registerUser(AppUser appUser) {
+        if (userRepository.existsByUsername(appUser.getUsername())) {
             throw new RuntimeException("Username already exists!");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+        userRepository.save(appUser);
     }
 
     public boolean existsByUsername(String username) {
         return userRepository.existsByUsername(username);
     }
     
-    public User getUserByUsername(String username) {
-        User user = userRepository.findByUsername(username);
-        if (user != null) {
-            return user;
+    public AppUser getUserByUsername(String username) {
+        AppUser appUser = userRepository.findByUsername(username);
+        if (appUser != null) {
+            return appUser;
         } else {
             throw new RuntimeException("User not found with username: " + username);
         }

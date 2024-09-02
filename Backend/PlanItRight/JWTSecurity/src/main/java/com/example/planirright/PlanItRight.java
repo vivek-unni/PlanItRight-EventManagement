@@ -1,16 +1,15 @@
-package com.example.wellnesshub;
+package com.example.planirright;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-public class WellnessHubApplication {
+public class PlanItRight {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WellnessHubApplication.class, args);
+		SpringApplication.run(PlanItRight.class, args);
 	}
 	
 	@Bean
