@@ -9,11 +9,6 @@
         </div>
   
         <div class="form-group">
-          <label for="eventDate">Event Date</label>
-          <input type="date" id="eventDate" name="eventDate" [(ngModel)]="eventDate" required>
-        </div>
-  
-        <div class="form-group">
           <label for="eventLocation">Location</label>
           <input type="text" id="eventLocation" name="eventLocation" [(ngModel)]="eventLocation" required>
         </div>
@@ -28,6 +23,13 @@
             <input type="text" id="eventBudget" name="eventBudget" [(ngModel)]="eventBudget" required>
           </div>
 
+          <div class="date-and-type">
+
+          <div class="form-group">
+            <label for="eventDate">Event Date</label>
+            <input type="date" id="eventDate" name="eventDate" [(ngModel)]="eventDate" required>
+          </div>
+
           <div class="form-group">
             <label for="eventType">Type</label>
             <select id="eventType" name="eventType" [(ngModel)]="eventType" required>
@@ -38,6 +40,7 @@
               <option value="Others">Others</option>
             </select>
           </div>
+        </div>
   
         <div class="form-actions">
           <button type="submit" class="btn">Create Event</button>

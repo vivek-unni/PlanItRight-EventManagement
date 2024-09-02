@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EventNavComponent } from "../event-nav/event-nav.component";
 import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
@@ -12,6 +12,10 @@ import { AddGuestComponent } from "./add-guest/add-guest.component";
   styleUrl: './guestlist.component.css'
 })
 export class GuestlistComponent implements OnInit {
+
+  @Input() eventId!: number;
+
+
   guests: any[] = [];
   acceptedGuests: any[] = [];
   rejectedGuests: any[] = [];
@@ -24,6 +28,9 @@ export class GuestlistComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+    console.log('Event ID:', this.eventId);
+
     // Hardcoded dummy data for demonstration
     this.guests = [
       { name: 'John Doe', status: 'accepted', email: 'john.doe@example.com' },

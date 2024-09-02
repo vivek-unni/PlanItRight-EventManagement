@@ -5,6 +5,7 @@ import { EventService } from '../../event.service';
 import { FormsModule } from '@angular/forms';
 import { EventModel } from '../../EventModel';
 import { lastValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-events',
@@ -20,9 +21,11 @@ export class EventsComponent implements OnInit {
   location_icon: string = '/assets/icons8-location-100.png';
 
   isPopupOpen = false;
-  eventData: EventModel[] = [] ;
+  eventData: EventModel[] = [];
+  filteredEvents: EventModel[] = [];
+  searchQuery: string = '';
 
-  constructor(private eventService: EventService) {}
+  constructor(private eventService: EventService, private router: Router) {}
 
   ngOnInit(): void {
     this.load(); // Call load method on initialization
@@ -40,6 +43,7 @@ export class EventsComponent implements OnInit {
     try {
       const data = await lastValueFrom(this.eventService.fetchAllEvents());
       this.eventData = data ?? []; // Default to an empty array if data is undefined
+      this.filteredEvents = this.eventData; // Initially, display all events
       console.log(this.eventData);
     } catch (error) {
       console.error('Error fetching events:', error);
@@ -47,9 +51,30 @@ export class EventsComponent implements OnInit {
   }
   
   openDashboard(event: EventModel): void {
-    console.log('Dashboard opened for event:', event.name);
-    
+    // Navigate to the DashboardComponent with the event ID as a route parameter
+    this.router.navigate(['/dashboard', event.eventId]);
   }
 
+  onSearch(event: Event): void {
+    const searchValue = (event.target as HTMLInputElement).value
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, ''); // Remove all spaces from the search query
+  
+    this.searchQuery = searchValue;
+  
+    if (this.searchQuery) {
+      this.filteredEvents = this.eventData.filter(event =>
+        event.name.toLowerCase().replace(/\s+/g, '').includes(this.searchQuery)
+      );
+    } else {
+      this.filteredEvents = this.eventData; // Show all events if search query is empty
+    }
+  }
+
+  // New method to handle event creation
+  onEventCreated(): void {
+    this.load(); // Reload the event list after a new event is created
+  }
   
 }
