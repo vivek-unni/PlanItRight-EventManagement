@@ -24,8 +24,8 @@ public class NotificationService {
     @Autowired
     private NotificationClient notificationClient;
 
-    @Value("$(spring.mail.username)")
-    private String fromEmailId;
+//    @Value("$(spring.mail.username)")
+//    private String fromEmailId;
 
     public Notification createNotification(Notification notification) {
         return notificationRepository.save(notification);
@@ -40,12 +40,12 @@ public class NotificationService {
        if(guest!=null){
 
            SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-simpleMailMessage.setFrom(fromEmailId);
+simpleMailMessage.setFrom("Event");
         simpleMailMessage.setTo(guest.getEmail());
         simpleMailMessage.setText(notification.getMessage());
         simpleMailMessage.setSubject(notification.getSubject());
 
-        javaMailSender.send(simpleMailMessage);
+           javaMailSender.send(simpleMailMessage);
 
        }
     }
