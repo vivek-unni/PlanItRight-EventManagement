@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { EventService } from '../../event.service';
 
 @Component({
   selector: 'app-homepage',
