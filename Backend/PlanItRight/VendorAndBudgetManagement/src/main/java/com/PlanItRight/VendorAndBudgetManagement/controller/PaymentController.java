@@ -3,6 +3,8 @@ package com.PlanItRight.VendorAndBudgetManagement.controller;
 import com.PlanItRight.VendorAndBudgetManagement.exception.PaymentNotFoundException;
 import com.PlanItRight.VendorAndBudgetManagement.exception.VendorNotFoundException;
 import com.PlanItRight.VendorAndBudgetManagement.model.Payment;
+import com.PlanItRight.VendorAndBudgetManagement.model.Vendor;
+import com.PlanItRight.VendorAndBudgetManagement.repository.PaymentProjection;
 import com.PlanItRight.VendorAndBudgetManagement.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api/payments")
 public class PaymentController {
@@ -58,5 +61,10 @@ public class PaymentController {
     public ResponseEntity<Payment> getPaymentById(@PathVariable Long paymentId) throws PaymentNotFoundException {
         Optional<Payment> payment = paymentService.getPaymentById(paymentId);
         return payment.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<PaymentProjection>> getAllPayments() {
+        return ResponseEntity.ok(paymentService.getAllPayments());
     }
 }

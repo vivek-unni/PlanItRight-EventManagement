@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-guestlist-sub',
@@ -15,11 +15,12 @@ export class GuestlistSubComponent {
   currentAcceptedIndex: number = 0;
   currentRejectedIndex: number = 0;
   intervalId: any;
-
+  @Input() eventId!: number;
   constructor() { }
 
   ngOnInit(): void {
     // Hardcoded dummy data for demonstration
+    console.log('Event ID:', this.eventId);
     this.guests = [
       { name: 'John Doe', status: 'accepted' },
       { name: 'Jane Smith', status: 'rejected' },

@@ -33,6 +33,9 @@ export class ScheduleComponent implements OnInit {
     // ... add more tasks here
   ];
 
+  eventId= localStorage.getItem('eventId');
+
+
   filteredTasks: Task[] = [];
   displayedTasks: Task[] = [];
   tasksPerPage = 7;
@@ -41,6 +44,7 @@ export class ScheduleComponent implements OnInit {
   searchTerm: string = '';
 
   ngOnInit() {
+    console.log('Event ID:', this.eventId);
     this.filteredTasks = [...this.tasks];
     this.updateDisplayedTasks();
   }

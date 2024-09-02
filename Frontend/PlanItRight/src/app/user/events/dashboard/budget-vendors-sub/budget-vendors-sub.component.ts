@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-budget-vendors-sub',
@@ -9,15 +9,21 @@ import { Component } from '@angular/core';
   styleUrl: './budget-vendors-sub.component.css'
 })
 export class BudgetVendorsSubComponent {
+
+  @Input() eventId!: number;
+
   vendors: any[] = [];
   highestVendor: any;
   secondHighestVendor: any;
   currentIndex: number = 0;
   intervalId: any;
+  
+
 
   constructor() {}
 
   ngOnInit(): void {
+    console.log('Event ID:', this.eventId);
     // Hardcoded dummy data for demonstration
     this.vendors = [
       { name: 'Vendor A', spend: 50000 },

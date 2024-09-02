@@ -4,6 +4,7 @@ import com.PlanItRight.VendorAndBudgetManagement.exception.PaymentNotFoundExcept
 import com.PlanItRight.VendorAndBudgetManagement.exception.VendorNotFoundException;
 import com.PlanItRight.VendorAndBudgetManagement.model.Payment;
 import com.PlanItRight.VendorAndBudgetManagement.model.Vendor;
+import com.PlanItRight.VendorAndBudgetManagement.repository.PaymentProjection;
 import com.PlanItRight.VendorAndBudgetManagement.repository.PaymentRepository;
 import com.PlanItRight.VendorAndBudgetManagement.repository.VendorRepository;
 
@@ -21,6 +22,10 @@ public class PaymentService {
 
     @Autowired
     private VendorRepository vendorRepository;
+
+    public List<PaymentProjection> getAllPayments() {
+        return paymentRepository.findAllPayments();
+    }
 
     public Payment createPayment(Payment payment, Long vendorId, Long eventId) throws VendorNotFoundException {
         Vendor vendor = vendorRepository.findById(vendorId)
