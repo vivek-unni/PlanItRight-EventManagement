@@ -2,8 +2,8 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
-import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,53 +14,23 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  email: string = "";
-  password: string = "";
+ 
+  loginData = { username: '', password: '' };
+  loginError: string | null = null;
+  isAuthenticated: boolean = false;
+  constructor(private authService: AuthService, private router: Router) {}
 
-  constructor(private loginService: LoginService, private router: Router) {}
-
-  print() {
-    // Update auth object with the latest values of email and password
-    const auth = {
-      emailaddress: this.email,
-      password: this.password
-    };
-    
-    console.log(auth.emailaddress + ' ' + auth.password);
-    this.loadToken(auth);
-  }
-
-  token: string | null = null;
-
-  loadToken(auth: { emailaddress: string; password: string }) {
-    this.loginService.getToken(auth).subscribe(
-      (data) => {
-        console.log("Data  "+data.token)
-        console.log('Auth data:', auth);  // Logging the auth object
-        this.token = data.token;
-        console.log("Token" +this.token);
-        this.sendAuthRequest();
+  login() {
+    this.authService.login(this.loginData).subscribe(
+      () => {
+        // Navigate to the dashboard after successful login
+        console.log("HIi")
+        this.router.navigate(['events']);
+        this.isAuthenticated = true;
       },
-      (error: any) => {
-        console.error('Error Fetching', error);
-        this.token = "Error";
-      }
-    );
-  }
-
-  sendAuthRequest() {
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.token
-    });
-
-    const url = 'http://localhost:9099/login';
-    this.loginService.sendAuthenticatedRequest(url, headers).subscribe(
-      (data) => {
-        console.log('Authenticated Request Successful:', data);
-        this.router.navigate(['home']);
-      },
-      (error: any) => {
-        console.error('Authenticated Request Failed:', error);
+      error => {
+        console.error('Login failed:', error);
+        this.loginError = 'Invalid username or password';
       }
     );
   }
