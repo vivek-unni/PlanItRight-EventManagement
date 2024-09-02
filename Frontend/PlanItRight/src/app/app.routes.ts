@@ -8,7 +8,7 @@ import { BudgetVendorsComponent } from './user/events/budget-vendors/budget-vend
 
 export const routes: Routes = [
     { path: 'events', component: EventsComponent },
-    { path: 'dashboard', component: DashboardComponent },
+    { path: 'dashboard/:eventId', component: DashboardComponent },
     { path: 'guestlist', component: GuestlistComponent },
     { path: 'schedule', component: ScheduleComponent },
     { path: 'budget', component: BudgetVendorsComponent },

@@ -32,10 +32,10 @@ public class Event {
     @OneToMany
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "event_id")
-    private List<Task> tasks;
+    private List<com.PlanItRight.EventManagementService.model.Task> tasks;
 
     @OneToMany
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "event_id")
-    private List<Guest> guests;
+    private List<com.PlanItRight.EventManagementService.model.Guest> guests;
 }
