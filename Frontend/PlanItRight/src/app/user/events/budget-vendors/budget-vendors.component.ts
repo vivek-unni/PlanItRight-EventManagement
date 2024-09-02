@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EventNavComponent } from "../event-nav/event-nav.component";
 import { BudgetChartComponent } from "./budget-chart/budget-chart.component";
 
@@ -9,6 +9,12 @@ import { BudgetChartComponent } from "./budget-chart/budget-chart.component";
   templateUrl: './budget-vendors.component.html',
   styleUrl: './budget-vendors.component.css'
 })
-export class BudgetVendorsComponent {
+export class BudgetVendorsComponent implements OnInit{
 
+  eventId= localStorage.getItem('eventId');
+
+
+  ngOnInit(): void {
+    console.log('Event ID:', this.eventId);
+  }
 }

@@ -28,5 +28,6 @@ public class Payment {
             private Double amount;
             private LocalDate dueDate;
             private String status;
+
 }
 

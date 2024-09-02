@@ -13,9 +13,9 @@ import { AddGuestComponent } from "./add-guest/add-guest.component";
 })
 export class GuestlistComponent implements OnInit {
 
-  @Input() eventId!: number;
 
 
+  eventId= localStorage.getItem('eventId');
   guests: any[] = [];
   acceptedGuests: any[] = [];
   rejectedGuests: any[] = [];

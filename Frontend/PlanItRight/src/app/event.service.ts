@@ -20,4 +20,9 @@ export class EventService {
     let url = `${this.baseUrl}/events/addEvent`;
     return this.http.post<EventModel>(url, event);
   }
+
+  fetchEventById(eventId: number): Observable<EventModel> {
+    let url = `${this.baseUrl}/events/${eventId}`;
+    return this.http.get<EventModel>(url);
+  }
 }

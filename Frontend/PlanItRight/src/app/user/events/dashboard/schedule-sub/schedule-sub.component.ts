@@ -1,5 +1,5 @@
 import { NgClass, NgFor } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 
 //model interface
@@ -29,10 +29,13 @@ export class ScheduleSubComponent implements OnInit {
   currentIndex: number = 0;
   intervalId: any;
 
+  @Input() eventId!: number;
+
   constructor() {}
 
   ngOnInit(): void {
     // Extended dummy data for demonstration purposes
+    console.log('Event ID:', this.eventId);
     this.schedules = [
       { id: 1, name: 'Complete Angular Project', description: 'Finish the Angular project and submit it before the due date.', dueDate: new Date('2024-09-01'), status: 'Pending' },
       { id: 2, name: 'Prepare Presentation', description: 'Prepare slides for the upcoming presentation.', dueDate: new Date('2024-09-02'), status: 'In Progress' },
