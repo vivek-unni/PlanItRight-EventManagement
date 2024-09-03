@@ -57,6 +57,9 @@ public class EventService {
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + id));
     }
 
+    public List<Event> getAllEventsByUsername(String username) {
+        return eventRepository.findAllByUsername(username);
+    }
 
 
 //    public Task addTaskToEvent(Long eventId, Task task) {

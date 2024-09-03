@@ -2,14 +2,20 @@ package com.PlanItRight.EventManagementService.model;
 
 
 
-import jakarta.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+import org.hibernate.annotations.Cascade;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
-
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -20,8 +26,7 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long eventId;
-
-//    private Long username;
+    private String username;
     private String name;
     private String description;
     private Date date;

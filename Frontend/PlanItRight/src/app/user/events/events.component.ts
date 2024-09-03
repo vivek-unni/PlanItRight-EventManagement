@@ -5,7 +5,7 @@ import { EventService } from '../../event.service';
 import { FormsModule } from '@angular/forms';
 import { EventModel } from '../../Models/EventModel';
 import { lastValueFrom } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
 
 @Component({
@@ -17,6 +17,8 @@ import { AuthService } from '../../auth.service';
 })
 export class EventsComponent implements OnInit {
 
+
+  username: string | null = null;
   create_icon: string = '/assets/icons8-create-90.png';
   calender_icon: string = '/assets/icons8-calender-100.png';
   location_icon: string = '/assets/icons8-location-100.png';
@@ -26,13 +28,17 @@ export class EventsComponent implements OnInit {
   filteredEvents: EventModel[] = [];
   searchQuery: string = '';
 
-  constructor(private eventService: EventService, private router: Router , private authService : AuthService) {}
+  constructor(private eventService: EventService, private router: Router, private authService: AuthService,private route: ActivatedRoute) { }
   isLoggedIn: boolean = false;
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isAuthenticated();  // Check initial state
-  this.authService.isLoggedIn.subscribe(
-    (loggedIn: boolean) => this.isLoggedIn = loggedIn
-  );
+    this.authService.isLoggedIn.subscribe(
+      (loggedIn: boolean) => this.isLoggedIn = loggedIn
+    );
+    this.route.queryParamMap.subscribe(params => {
+      this.username = params.get('username');
+      console.log('Username:', this.username);
+    });
     this.load(); // Call load method on initialization
   }
 
@@ -46,7 +52,7 @@ export class EventsComponent implements OnInit {
 
   async load() {
     try {
-      const data = await lastValueFrom(this.eventService.fetchAllEvents());
+      const data = await lastValueFrom(this.eventService.fetchEventsByUsername(this.username));
       this.eventData = data ?? []; // Default to an empty array if data is undefined
       this.filteredEvents = this.eventData; // Initially, display all events
       console.log(this.eventData);
@@ -54,7 +60,7 @@ export class EventsComponent implements OnInit {
       console.error('Error fetching events:', error);
     }
   }
-  
+
   openDashboard(event: EventModel): void {
     // Navigate to the DashboardComponent with the event ID as a route parameter
     this.router.navigate(['/dashboard', event.eventId]);
@@ -65,9 +71,9 @@ export class EventsComponent implements OnInit {
       .trim()
       .toLowerCase()
       .replace(/\s+/g, ''); // Remove all spaces from the search query
-  
+
     this.searchQuery = searchValue;
-  
+
     if (this.searchQuery) {
       this.filteredEvents = this.eventData.filter(event =>
         event.name.toLowerCase().replace(/\s+/g, '').includes(this.searchQuery)
@@ -83,10 +89,10 @@ export class EventsComponent implements OnInit {
   }
 
 
-  logout(){
+  logout() {
     this.authService.logout();
     this.isLoggedIn = false;
     this.router.navigate(['/']);
   }
-  
+
 }

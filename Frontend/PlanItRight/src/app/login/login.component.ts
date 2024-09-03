@@ -25,7 +25,7 @@ export class LoginComponent {
       () => {
         // Navigate to the dashboard after successful login
         console.log("HIi")
-        this.router.navigate(['events']);
+        this.router.navigate(['events'], { queryParams: { username: this.loginData.username } });
         this.isAuthenticated = true;
       },
       error => {
