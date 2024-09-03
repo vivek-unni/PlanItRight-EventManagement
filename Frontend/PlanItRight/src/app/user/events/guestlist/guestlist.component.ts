@@ -3,6 +3,8 @@ import { EventNavComponent } from "../event-nav/event-nav.component";
 import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
 import { AddGuestComponent } from "./add-guest/add-guest.component";
+import { GuestModel } from '../../../Models/GuestModel';
+import { GuestService } from '../../../GuestService/guest.service';
 
 @Component({
   selector: 'app-guestlist',
@@ -13,68 +15,37 @@ import { AddGuestComponent } from "./add-guest/add-guest.component";
 })
 export class GuestlistComponent implements OnInit {
 
+  eventIdget = localStorage.getItem('eventId');
+  eventId = Number(this.eventIdget);
 
-
-  eventId= localStorage.getItem('eventId');
-  guests: any[] = [];
-  acceptedGuests: any[] = [];
-  rejectedGuests: any[] = [];
-  noreplyGuests: any[] = [];
-  filteredAcceptedGuests: any[] = [];
-  filteredRejectedGuests: any[] = [];
-  filteredNoReplyGuests: any[] = [];
+  guests: GuestModel[] = [];
+  acceptedGuests: GuestModel[] = [];
+  rejectedGuests: GuestModel[] = [];
+  noreplyGuests: GuestModel[] = [];
+  filteredAcceptedGuests: GuestModel[] = [];
+  filteredRejectedGuests: GuestModel[] = [];
+  filteredNoReplyGuests: GuestModel[] = [];
   searchTerm: string = '';
 
-  constructor() { }
+  constructor(private guestService: GuestService) { }
 
   ngOnInit(): void {
-
     console.log('Event ID:', this.eventId);
 
-    // Hardcoded dummy data for demonstration
-    this.guests = [
-      { name: 'John Doe', status: 'accepted', email: 'john.doe@example.com' },
-      { name: 'Jane Smith', status: 'rejected', email: 'jane.smith@example.com' },
-      { name: 'Alice Johnson', status: 'accepted', email: 'alice.johnson@example.com' },
-      { name: 'Bob Brown', status: 'rejected', email: 'bob.brown@example.com' },
-      { name: 'Charlie Davis', status: 'accepted', email: 'charlie.davis@example.com' },
-      { name: 'Emily White', status: 'accepted', email: 'emily.white@example.com' },
-      { name: 'Frank Black', status: 'rejected', email: 'frank.black@example.com' },
-      { name: 'George Green', status: 'accepted', email: 'george.green@example.com' },
-      { name: 'Helen Blue', status: 'rejected', email: 'helen.blue@example.com' },
-      { name: 'Ian Yellow', status: 'accepted', email: 'ian.yellow@example.com' },
-      { name: 'Jack Orange', status: 'accepted', email: 'jack.orange@example.com' },
-      { name: 'Karen Purple', status: 'rejected', email: 'karen.purple@example.com' },
-      { name: 'Laura Pink', status: 'accepted', email: 'laura.pink@example.com' },
-      { name: 'Mike Gray', status: 'rejected', email: 'mike.gray@example.com' },
-      { name: 'Nina Violet', status: 'accepted', email: 'nina.violet@example.com' },
-      { name: 'Oscar Red', status: 'accepted', email: 'oscar.red@example.com' },
-      { name: 'Paul Cyan', status: 'rejected', email: 'paul.cyan@example.com' },
-      { name: 'Quincy Magenta', status: 'accepted', email: 'quincy.magenta@example.com' },
-      { name: 'Rachel Lime', status: 'rejected', email: 'rachel.lime@example.com' },
-      { name: 'Steve Brown', status: 'accepted', email: 'steve.brown@example.com' },
-      { name: 'Tina Black', status: 'accepted', email: 'tina.black@example.com' },
-      { name: 'Uma White', status: 'rejected', email: 'uma.white@example.com' },
-      { name: 'Victor Blue', status: 'accepted', email: 'victor.blue@example.com' },
-      { name: 'Wendy Green', status: 'rejected', email: 'wendy.green@example.com' },
-      { name: 'Xander Yellow', status: 'accepted', email: 'xander.yellow@example.com' },
-      { name: 'Yara Orange', status: 'accepted', email: 'yara.orange@example.com' },
-      { name: 'Zane Purple', status: 'rejected', email: 'zane.purple@example.com' },
-      { name: 'Albert Silver', status: 'noreply', email: 'albert.silver@example.com' },
-      { name: 'Betty Gold', status: 'noreply', email: 'betty.gold@example.com' },
-      { name: 'Catherine Bronze', status: 'noreply', email: 'catherine.bronze@example.com' },
-      { name: 'David Copper', status: 'noreply', email: 'david.copper@example.com' },
-      { name: 'Eve Nickel', status: 'noreply', email: 'eve.nickel@example.com' },
-      { name: 'Fred Zinc', status: 'noreply', email: 'fred.zinc@example.com' }
-    ];
+    this.guestService.getGuestsByEventId(this.eventId).subscribe(
+      (response: GuestModel[]) => {
+        this.guests = response;
 
-    // Initially display all guests
-    this.acceptedGuests = this.guests.filter(guest => guest.status === 'accepted');
-    this.rejectedGuests = this.guests.filter(guest => guest.status === 'rejected');
-    this.noreplyGuests = this.guests.filter(guest => guest.status === 'noreply');
+        this.acceptedGuests = this.guests.filter(guest => guest.rsvpStatus === 'accepted');
+        this.rejectedGuests = this.guests.filter(guest => guest.rsvpStatus === 'rejected');
+        this.noreplyGuests = this.guests.filter(guest => (guest.rsvpStatus === '' || guest.rsvpStatus === null || guest.rsvpStatus === 'noreply'));
 
-    // Set the filtered lists to show all guests initially
-    this.filterGuests();
+        this.filterGuests(); // Initial filtering
+      },
+      error => {
+        console.error('Error fetching guests:', error);
+      }
+    );
   }
 
   filterGuests(): void {
@@ -102,22 +73,7 @@ export class GuestlistComponent implements OnInit {
     }
   }
 
-  getAcceptedGuests(): any[] {
-    return this.filteredAcceptedGuests;
-  }
-
-  getRejectedGuests(): any[] {
-    return this.filteredRejectedGuests;
-  }
-
-  getNoReplyGuests(): any[] {
-    return this.filteredNoReplyGuests;
-  }
-
-  //POPUP ADD GUEST
-
-  isPopupOpen = false;
-
+  isPopupOpen: boolean = false;
 
   openPopup(): void {
     this.isPopupOpen = true;
@@ -125,6 +81,5 @@ export class GuestlistComponent implements OnInit {
 
   closePopup(): void {
     this.isPopupOpen = false;
-  }
-  
+  }  
 }

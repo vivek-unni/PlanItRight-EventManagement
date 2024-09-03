@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-//@CrossOrigin("http://localhost:4200")
+
 @RestController
 @RequestMapping("/api/events")
 public class EventController {
@@ -47,4 +47,8 @@ public class EventController {
         eventService.deleteEvent(id);
    }
 
+    @GetMapping("/{username}/all")
+    public List<Event> getAllEventsByUsername(@PathVariable String username) {
+        return eventService.getAllEventsByUsername(username);
+    }
 }

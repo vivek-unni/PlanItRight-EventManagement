@@ -1,5 +1,5 @@
 import { Task } from "./TaskModel";
-import { Guest } from "./GuestModel";
+import { GuestModel } from "./GuestModel";
 
 export class EventModel{
     eventId: number;
@@ -10,12 +10,9 @@ export class EventModel{
     type: string;
     budget: number;
     tasks: Task[];
-    guests: Guest[];
+    guests: GuestModel[];
 
-
-
-
-    constructor(eventId: number, name: string, description: string, date: Date, location: string, type: string, budget: number, tasks: Task[] = [], guests: Guest[] = []) {
+    constructor(eventId: number, name: string, description: string, date: Date, location: string, type: string, budget: number, tasks: Task[] = [], guests: GuestModel[] = []) {
         this.eventId = eventId;
         this.name = name;
         this.description = description;
