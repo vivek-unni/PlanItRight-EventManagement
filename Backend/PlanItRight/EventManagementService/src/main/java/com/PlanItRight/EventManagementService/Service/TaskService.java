@@ -1,12 +1,13 @@
 package com.PlanItRight.EventManagementService.service;
 
 
-import com.PlanItRight.EventManagementService.Repository.TaskProjection;
+import com.PlanItRight.EventManagementService.repository.TaskProjection;
 import com.PlanItRight.EventManagementService.exception.DatabaseException;
 import com.PlanItRight.EventManagementService.exception.ResourceNotFoundException;
 import com.PlanItRight.EventManagementService.model.Event;
 import com.PlanItRight.EventManagementService.model.Task;
 import com.PlanItRight.EventManagementService.repository.EventRepository;
+import com.PlanItRight.EventManagementService.repository.TaskProjection;
 import com.PlanItRight.EventManagementService.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
