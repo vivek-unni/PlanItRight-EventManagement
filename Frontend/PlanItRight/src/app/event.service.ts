@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
 })
 export class EventService {
 
-  baseUrl = "http://localhost:7001/api"
+  baseUrl = "http://localhost:7000/api"
   constructor(private http : HttpClient) { }
 
   fetchAllEvents(){
-    let url="http://localhost:7001/api/events/all"
+    let url="http://localhost:7000/api/events/all"
     return this.http.get<EventModel[]>(url)
   }
 

@@ -18,4 +18,8 @@ export class EventNavComponent{
   toggleNavbarVisibility(): void {
     this.isNavbarExpanded = !this.isNavbarExpanded;
   }
+
+  logout(){
+    console.log("Successfully Logged Out")
+  }
 }

@@ -38,7 +38,7 @@ spring:
 #              - StripPrefix=1
 
 server:
-  port: 9099
+  port: 7000
 
 eureka:
   client:

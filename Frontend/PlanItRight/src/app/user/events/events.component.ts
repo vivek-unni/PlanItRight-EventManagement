@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { EventModel } from '../../EventModel';
 import { lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-events',
@@ -25,9 +26,13 @@ export class EventsComponent implements OnInit {
   filteredEvents: EventModel[] = [];
   searchQuery: string = '';
 
-  constructor(private eventService: EventService, private router: Router) {}
-
+  constructor(private eventService: EventService, private router: Router , private authService : AuthService) {}
+  isLoggedIn: boolean = false;
   ngOnInit(): void {
+    this.isLoggedIn = this.authService.isAuthenticated();  // Check initial state
+  this.authService.isLoggedIn.subscribe(
+    (loggedIn: boolean) => this.isLoggedIn = loggedIn
+  );
     this.load(); // Call load method on initialization
   }
 
@@ -75,6 +80,13 @@ export class EventsComponent implements OnInit {
   // New method to handle event creation
   onEventCreated(): void {
     this.load(); // Reload the event list after a new event is created
+  }
+
+
+  logout(){
+    this.authService.logout();
+    this.isLoggedIn = false;
+    this.router.navigate(['/']);
   }
   
 }

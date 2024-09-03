@@ -41,7 +41,18 @@ public class SecurityConfig {
         .cors()
         .and()
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/login", "/api/register", "/api/check-username","/DietPlanner/api/diets","/fitness/api/caloriesToBeBurned").permitAll()
+                    .requestMatchers(
+                            "/api/login",
+                            "/api/register",
+                            "/api/check-username",
+                            "/api/events/**",
+                            "/api/guests/**",
+                            "/api/tasks/**",
+                            "/api/notifications/**",
+                            "/api/vendors/**",
+                            "/api/budgets/**",
+                            "/api/payments/**"
+                    ).permitAll()
                 .anyRequest().authenticated()
             )
             .exceptionHandling(exceptionHandling -> exceptionHandling

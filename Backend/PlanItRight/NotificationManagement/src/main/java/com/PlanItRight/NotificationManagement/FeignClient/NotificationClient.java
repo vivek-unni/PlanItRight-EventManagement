@@ -14,6 +14,6 @@ public interface NotificationClient {
 
     @GetMapping("/api/guests/{eventId}/all")
     public List<GuestDTO> getAllGuestsFromEvent(@PathVariable Long eventId) ;
-
+ 
 
 }

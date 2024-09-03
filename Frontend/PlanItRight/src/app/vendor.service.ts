@@ -9,8 +9,8 @@ import { Payment } from './PaymentModel';
 })
 export class VendorService {
 
-  private vendorApiUrl = 'http://localhost:7002/api/vendors';
-  private paymentApiUrl = 'http://localhost:7002/api/payments/all';
+  private vendorApiUrl = 'http://localhost:7000/api/vendors';
+  private paymentApiUrl = 'http://localhost:7000/api/payments/all';
 
   constructor(private http: HttpClient) {}
 

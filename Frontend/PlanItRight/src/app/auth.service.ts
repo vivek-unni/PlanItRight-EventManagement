@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:9099/api';  // Your Spring Boot backend URL
+  private apiUrl = 'http://localhost:7000/api';  // Your Spring Boot backend URL
 
   private loggedIn = new BehaviorSubject<boolean>(this.isAuthenticated());
 
