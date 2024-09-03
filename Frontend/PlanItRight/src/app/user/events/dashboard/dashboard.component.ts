@@ -4,7 +4,7 @@ import { BudgetVendorsSubComponent } from "./budget-vendors-sub/budget-vendors-s
 import { GuestlistSubComponent } from "./guestlist-sub/guestlist-sub.component";
 import { ScheduleSubComponent } from "./schedule-sub/schedule-sub.component";
 import { ActivatedRoute } from '@angular/router';
-import { EventModel } from '../../../EventModel';
+import { EventModel } from '../../../Models/EventModel';
 import { EventService } from '../../../event.service';
 
 @Component({

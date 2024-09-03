@@ -1,13 +1,13 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, AfterViewChecked, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { BarController, BarElement, CategoryScale, Chart, Legend, LinearScale, registerables, Title, Tooltip } from 'chart.js';
+import { BarController, BarElement, CategoryScale, Chart, Legend, LinearScale, LineController, LineElement, PointElement, registerables, Title, Tooltip } from 'chart.js';
 import { VendorsComponent } from "../vendors/vendors.component";
 import { VendorService } from '../../../../vendor.service';
 import { forkJoin, map } from 'rxjs';
 import { EventService } from '../../../../event.service';
 
-Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, BarController);
+Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, BarController, LineElement, LineController , PointElement);
 
 @Component({
   selector: 'app-budget-chart',

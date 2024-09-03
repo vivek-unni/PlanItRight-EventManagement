@@ -1,6 +1,7 @@
 package com.PlanItRight.EventManagementService.service;
 
 
+import com.PlanItRight.EventManagementService.Repository.TaskProjection;
 import com.PlanItRight.EventManagementService.exception.DatabaseException;
 import com.PlanItRight.EventManagementService.exception.ResourceNotFoundException;
 import com.PlanItRight.EventManagementService.model.Event;
@@ -22,20 +23,16 @@ public class TaskService {
     private EventRepository eventRepository;
 
     public Task addTaskToEvent(Long eventId, Task task) throws ResourceNotFoundException, DatabaseException {
+        // Check if the event exists
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new ResourceNotFoundException("Event not found with ID: " + eventId));
+
         try {
-            Event event = eventRepository.findById(eventId)
-                    .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + eventId));
-
-
-            event.getTasks().add(task);
-            taskRepository.save(task);
-            eventRepository.save(event);
-            return task;
-
-        } catch (ResourceNotFoundException e) {
-            throw e;
+            // Associate the task with the event
+            task.setEvent(event);
+            return taskRepository.save(task);
         } catch (Exception e) {
-            throw new DatabaseException("An error occurred while saving the task to the event.", e);
+            throw new DatabaseException("Failed to add task to event: " + e.getMessage());
         }
     }
 
@@ -63,11 +60,21 @@ public class TaskService {
 //
 //    }
 
-    public List<Task> getAllTasksFromEvent(Long eventId) throws ResourceNotFoundException {
-        Event event = eventRepository.findById(eventId)
-                .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + eventId));
+//    public List<Task> getAllTasksFromEvent(Long eventId) throws ResourceNotFoundException {
+//        Event event = eventRepository.findById(eventId)
+//                .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + eventId));
+//
+//        return event.getTasks();
+//    }
 
-        return event.getTasks();
+    public List<TaskProjection> getTasksByEventId(Long eventId) throws ResourceNotFoundException {
+        List<TaskProjection> tasks = taskRepository.findAllByEventId(eventId);
+
+        if (tasks.isEmpty()) {
+            throw new ResourceNotFoundException("No tasks found for event ID " + eventId);
+        }
+
+        return tasks;
     }
 
 }

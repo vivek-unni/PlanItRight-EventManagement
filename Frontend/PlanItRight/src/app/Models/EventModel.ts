@@ -1,6 +1,7 @@
-import { Task } from './task';
-import { Guest } from './guest';
-export class EventModel {
+import { Task } from "./TaskModel";
+import { Guest } from "./GuestModel";
+
+export class EventModel{
     eventId: number;
     name: string;
     description: string;

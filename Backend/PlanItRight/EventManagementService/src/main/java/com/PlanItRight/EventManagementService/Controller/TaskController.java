@@ -1,6 +1,7 @@
 package com.PlanItRight.EventManagementService.controller;
 
 
+import com.PlanItRight.EventManagementService.Repository.TaskProjection;
 import com.PlanItRight.EventManagementService.exception.DatabaseException;
 import com.PlanItRight.EventManagementService.exception.ResourceNotFoundException;
 import com.PlanItRight.EventManagementService.model.Task;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api/tasks")
 public class TaskController {
@@ -31,8 +34,14 @@ public class TaskController {
     }
 
 
-    @GetMapping("/{eventId}/all")
-    public List<Task> getAllTasksFromEvent(@PathVariable Long eventId) throws ResourceNotFoundException {
-        return taskService.getAllTasksFromEvent(eventId);
+    @GetMapping("/event/{eventId}")
+    public List<TaskProjection> getTasksByEventId(@PathVariable Long eventId) throws ResourceNotFoundException {
+        List<TaskProjection> tasks = taskService.getTasksByEventId(eventId);
+
+        if (tasks.isEmpty()) {
+            throw new ResourceNotFoundException("No tasks found for event ID " + eventId);
+        }
+
+        return tasks;
     }
 }

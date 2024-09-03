@@ -3,7 +3,7 @@ import { EventPopupComponent } from "../event-popup/event-popup.component";
 import { NgFor, NgIf } from '@angular/common';
 import { EventService } from '../../event.service';
 import { FormsModule } from '@angular/forms';
-import { EventModel } from '../../EventModel';
+import { EventModel } from '../../Models/EventModel';
 import { lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 

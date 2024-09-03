@@ -3,6 +3,7 @@ import { CalendarComponent } from "./calendar/calendar.component";
 import { EventNavComponent } from "../event-nav/event-nav.component";
 import { NgFor, NgIf } from '@angular/common';
 import { AddTaskComponent } from "./add-task/add-task.component";
+import { TaskService } from '../../../TaskService/task.service';
 
 interface Task {
   name: string;
@@ -20,21 +21,10 @@ interface Task {
 })
 export class ScheduleComponent implements OnInit {
 
-  tasks: Task[] = [
-    { name: "Task 1", dueDate: "2023-04-15", dueTime: "14:00", status: "In Progress" },
-    { name: "Task 2", dueDate: "2023-04-16", dueTime: "10:00", status: "Pending" },
-    { name: "Task 3", dueDate: "2023-04-17", dueTime: "16:30", status: "Completed" },
-    { name: "Task 1", dueDate: "2023-04-15", dueTime: "14:00", status: "In Progress" },
-    { name: "Task 2", dueDate: "2023-04-16", dueTime: "10:00", status: "Pending" },
-    { name: "Task 3", dueDate: "2023-04-17", dueTime: "16:30", status: "Completed" },
-    { name: "Task 1", dueDate: "2023-04-15", dueTime: "14:00", status: "In Progress" },
-    { name: "Task 2", dueDate: "2023-04-16", dueTime: "10:00", status: "Pending" },
-    { name: "Task 3", dueDate: "2023-04-17", dueTime: "16:30", status: "Completed" },
-    // ... add more tasks here
-  ];
+  tasks: Task[] = [];
 
-  eventId= localStorage.getItem('eventId');
-
+  eventIdget= localStorage.getItem('eventId');
+  eventId=Number(this.eventIdget);
 
   filteredTasks: Task[] = [];
   displayedTasks: Task[] = [];
@@ -44,9 +34,27 @@ export class ScheduleComponent implements OnInit {
   searchTerm: string = '';
 
   ngOnInit() {
+    this.loadTasks();
     console.log('Event ID:', this.eventId);
     this.filteredTasks = [...this.tasks];
     this.updateDisplayedTasks();
+  }
+
+  constructor(private taskService: TaskService) {}
+
+  loadTasks() {
+    if (this.eventId) {
+      this.taskService.getTasksByEventId(this.eventId).subscribe(
+        (data: Task[]) => {
+          this.tasks = data;
+          this.filteredTasks = [...this.tasks];
+          this.updateDisplayedTasks();
+        },
+        (error) => {
+          console.error('Error fetching tasks:', error);
+        }
+      );
+    }
   }
 
   updateDisplayedTasks() {
@@ -90,6 +98,10 @@ export class ScheduleComponent implements OnInit {
 
     this.currentPage = 1;
     this.updateDisplayedTasks();
+  }
+
+  onTaskAdded(): void {
+    this.loadTasks(); // Reload tasks when a new task is added
   }
 
   isPopupOpen = false;
