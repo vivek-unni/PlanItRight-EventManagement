@@ -13,7 +13,9 @@ import { RouterLink } from '@angular/router';
 export class EventNavComponent{
   isNavbarExpanded: boolean = false;
 
-  @Input() eventId!: number;  // The event ID to be passed to each route
+  // @Input() eventId!: number;  // The event ID to be passed to each route
+  eventIdget=localStorage.getItem('eventId');
+  eventId = Number(this.eventIdget);
 
   toggleNavbarVisibility(): void {
     this.isNavbarExpanded = !this.isNavbarExpanded;
