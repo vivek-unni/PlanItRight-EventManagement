@@ -1,7 +1,7 @@
 package com.PlanItRight.EventManagementService.controller;
 
 
-import com.PlanItRight.EventManagementService.Repository.TaskProjection;
+import com.PlanItRight.EventManagementService.repository.TaskProjection;
 import com.PlanItRight.EventManagementService.exception.DatabaseException;
 import com.PlanItRight.EventManagementService.exception.ResourceNotFoundException;
 import com.PlanItRight.EventManagementService.model.Task;

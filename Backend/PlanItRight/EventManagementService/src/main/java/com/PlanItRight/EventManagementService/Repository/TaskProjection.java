@@ -1,4 +1,4 @@
-package com.PlanItRight.EventManagementService.Repository;
+package com.PlanItRight.EventManagementService.repository;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

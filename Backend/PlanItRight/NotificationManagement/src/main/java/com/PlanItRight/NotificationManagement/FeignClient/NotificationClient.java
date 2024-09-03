@@ -1,6 +1,7 @@
 package com.PlanItRight.NotificationManagement.FeignClient;
 
 
+import com.PlanItRight.NotificationManagement.DTO.EventDTO;
 import com.PlanItRight.NotificationManagement.DTO.GuestDTO;
 
 import org.springframework.cloud.openfeign.FeignClient;
@@ -14,6 +15,9 @@ public interface NotificationClient {
 
     @GetMapping("/api/guests/{eventId}/all")
     public List<GuestDTO> getAllGuestsFromEvent(@PathVariable Long eventId) ;
- 
+
+    @GetMapping("/api/events/all")
+    public List<EventDTO> getAllEvents();
+
 
 }
