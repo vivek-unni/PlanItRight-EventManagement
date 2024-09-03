@@ -12,6 +12,7 @@ import java.util.List;
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
     List<Payment> findByVendorIdAndEventId(Long vendorId, Long eventId);
     List<Payment> findByEventId(Long eventId);
+
     @Query("SELECT p.id AS id, p.vendor.id AS vendorId, p.eventId AS eventId, p.amount AS amount, p.dueDate AS dueDate, p.status AS status FROM Payment p")
     List<PaymentProjection> findAllPayments();
 }

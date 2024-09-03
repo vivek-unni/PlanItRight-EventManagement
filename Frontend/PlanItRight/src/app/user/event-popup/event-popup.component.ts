@@ -2,7 +2,7 @@ import { CommonModule, NgIf } from '@angular/common';
 import { Component, EventEmitter, NgModule, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EventService } from '../../event.service';
-import { EventModel } from '../../EventModel';
+import { EventModel } from '../../Models/EventModel';
 
 @Component({
   selector: 'app-event-popup',
