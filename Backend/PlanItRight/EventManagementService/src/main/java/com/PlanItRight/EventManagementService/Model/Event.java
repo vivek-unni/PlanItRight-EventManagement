@@ -21,6 +21,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long eventId;
 
+//    private Long username;
     private String name;
     private String description;
     private Date date;
