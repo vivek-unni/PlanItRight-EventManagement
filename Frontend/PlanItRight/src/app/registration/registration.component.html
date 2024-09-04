@@ -1,87 +1,48 @@
-<div class="registrationform">
-    <div class="title"><b>Registration Page</b></div>
-    <form class="row g-3 needs-validation" novalidate (ngSubmit)="onSubmit()" #registrationForm="ngForm">
-        <!-- <div class="col-md-4">
-            <label for="firstName" class="form-label">First name</label>
-            <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="firstName" required #firstNameCtrl="ngModel">
-            <div *ngIf="firstNameCtrl.invalid && firstNameCtrl.touched" class="alert">
-                <div *ngIf="firstNameCtrl.errors?.['required']">First name is required.</div>
-            </div>
+<div class="container">
+    <h2>Registration</h2>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" formControlName="fullname" class="form-control" />
+        <div *ngIf="submitted && f.fullname.errors">
+          <small class="text-danger" *ngIf="f.fullname.errors.required">Full Name is required</small>
         </div>
-        
-        <div class="col-md-4">
-            <label for="lastName" class="form-label">Last name</label>
-            <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="lastName" required #lastNameCtrl="ngModel">
-            <div *ngIf="lastNameCtrl.invalid && lastNameCtrl.touched" class="alert">
-                <div *ngIf="lastNameCtrl.errors?.['required']">Last name is required.</div>
-            </div>
-        </div> -->
-        
-        <div class="col-md-4">
-            <label for="username" class="form-label">Username</label>
-            <div class="input-group has-validation">
-                <span class="input-group-text" id="inputGroupPrepend"></span>
-                <input type="text" class="form-control" id="username" name="username" [(ngModel)]="username" required #usernameCtrl="ngModel">
-                <div *ngIf="usernameCtrl.invalid && usernameCtrl.touched" class="alert">
-                    <div *ngIf="usernameCtrl.errors?.['required']">Username is required.</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" required email #emailCtrl="ngModel">
-            <div *ngIf="emailCtrl.invalid && emailCtrl.touched" class="alert">
-                <div *ngIf="emailCtrl.errors?.['required']">Email is required.</div>
-                <div *ngIf="emailCtrl.errors?.['email']">Invalid email format.</div>
-            </div>
-        </div>
+      </div>
   
-        <div class="row g-3 align-items-center">
-            <div class="col-auto">
-                <label for="password" class="col-form-label">Password</label>
-            </div>
-            <div class="col-auto">
-                <input type="password" id="password" class="form-control" name="password" [(ngModel)]="password" minlength="8" required #passwordCtrl="ngModel">
-                <div *ngIf="passwordCtrl.invalid && passwordCtrl.touched" class="alert">
-                    <div *ngIf="passwordCtrl.errors?.['required']">Password is required.</div>
-                    <div *ngIf="passwordCtrl.errors?.['minlength']">Password must be at least 8 characters long.</div>
-                </div>
-            </div>
-            <div class="col-auto">
-                <span id="passwordHelpInline" class="form-text">
-                    Must be 8-20 characters long.
-                </span>
-            </div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="username" class="form-control" />
+        <div *ngIf="submitted && f.username.errors">
+          <small class="text-danger" *ngIf="f.username.errors.required">Username is required</small>
         </div>
+      </div>
   
-        <div class="row g-3 align-items-center">
-            <div class="col-auto">
-                <label for="confirmPassword" class="col-form-label">Re-Enter</label>
-            </div>
-            <div class="col-auto">
-                <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" [(ngModel)]="confirmPassword" required #confirmPasswordCtrl="ngModel">
-                <div *ngIf="confirmPasswordCtrl.invalid && confirmPasswordCtrl.touched" class="alert">
-                    <div *ngIf="confirmPasswordCtrl.errors?.['required']">Re-enter password is required.</div>
-                </div>
-            </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" formControlName="phone" class="form-control" />
+        <div *ngIf="submitted && f.phone.errors">
+          <small class="text-danger" *ngIf="f.phone.errors.required">Phone is required</small>
         </div>
+      </div>
   
-        <div class="col-12">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="terms" name="terms" [(ngModel)]="terms" required #termsCtrl="ngModel">
-                <label class="form-check-label" for="terms">
-                    Agree to terms and conditions
-                </label>
-                <div *ngIf="termsCtrl.invalid && termsCtrl.touched" class="alert">
-                    <div *ngIf="termsCtrl.errors?.['required']">You must agree to the terms and conditions.</div>
-                </div>
-            </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" class="form-control" />
+        <div *ngIf="submitted && f.email.errors">
+          <small class="text-danger" *ngIf="f.email.errors.required">Email is required</small>
+          <small class="text-danger" *ngIf="f.email.errors.email">Enter a valid email address</small>
         </div>
+      </div>
   
-        <div class="col-12">
-            <button class="btn btn-primary" type="submit" [disabled]="registrationForm.invalid">Submit form</button>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" class="form-control" />
+        <div *ngIf="submitted && f.password.errors">
+          <small class="text-danger" *ngIf="f.password.errors.required">Password is required</small>
         </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Register</button>
     </form>
   </div>
   
