@@ -21,7 +21,8 @@ export class EventPopupComponent {
   eventDescription: string = '';
   eventBudget: number = 0;
   eventType: string = '';
-
+  username=localStorage.getItem('username');
+  
   constructor(private eventService: EventService) {}
 
   onClose(): void {
@@ -37,6 +38,7 @@ export class EventPopupComponent {
         description: this.eventDescription,
         budget: this.eventBudget,
         type: this.eventType,
+        username:this.username,
         eventId: 0,
         tasks: [],
         guests: []

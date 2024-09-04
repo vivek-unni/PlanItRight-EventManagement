@@ -35,4 +35,10 @@ public class GuestController {
     public List<Guest> getAllGuestsFromEvent(@PathVariable Long eventId) throws ResourceNotFoundException {
         return guestService.getAllGuestsFromEvent(eventId);
     }
+
+//    @PutMapping("/{eventId}/{email}")
+//    public ResponseEntity<Guest> updateGuestRsvpStatus(@PathVariable Long eventId, @PathVariable String email, @RequestBody String rsvpStatus) throws ResourceNotFoundException {
+//        Guest updatedGuest = guestService.updateRsvpStatus(eventId, email, rsvpStatus);
+//        return ResponseEntity.ok(updatedGuest);
+//    }
 }

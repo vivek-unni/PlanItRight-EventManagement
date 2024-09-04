@@ -18,7 +18,8 @@ import { AuthService } from '../../auth.service';
 export class EventsComponent implements OnInit {
 
 
-  username: string | null = null;
+  username = localStorage.getItem('username');
+
   create_icon: string = '/assets/icons8-create-90.png';
   calender_icon: string = '/assets/icons8-calender-100.png';
   location_icon: string = '/assets/icons8-location-100.png';
@@ -35,10 +36,6 @@ export class EventsComponent implements OnInit {
     this.authService.isLoggedIn.subscribe(
       (loggedIn: boolean) => this.isLoggedIn = loggedIn
     );
-    this.route.queryParamMap.subscribe(params => {
-      this.username = params.get('username');
-      console.log('Username:', this.username);
-    });
     this.load(); // Call load method on initialization
   }
 

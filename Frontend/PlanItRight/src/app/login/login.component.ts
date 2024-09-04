@@ -13,7 +13,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css']  // Corrected to 'styleUrls' for array
 })
 export class LoginComponent {
-
+  // , { queryParams: { username: this.loginData.username } }
  
   loginData = { username: '', password: '' };
   loginError: string | null = null;
@@ -25,7 +25,8 @@ export class LoginComponent {
       () => {
         // Navigate to the dashboard after successful login
         console.log("HIi")
-        this.router.navigate(['events'], { queryParams: { username: this.loginData.username } });
+        this.router.navigate(['events']);
+        localStorage.setItem('username', this.loginData.username);
         this.isAuthenticated = true;
       },
       error => {

@@ -1,5 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { VendorService } from '../../../../vendor.service';
+import { Payment } from '../../../../Models/PaymentModel';
 
 @Component({
   selector: 'app-budget-vendors-sub',
@@ -9,7 +11,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './budget-vendors-sub.component.css'
 })
 export class BudgetVendorsSubComponent {
-
   @Input() eventId!: number;
 
   vendors: any[] = [];
@@ -17,47 +18,61 @@ export class BudgetVendorsSubComponent {
   secondHighestVendor: any;
   currentIndex: number = 0;
   intervalId: any;
-  
 
-
-  constructor() {}
+  constructor(private vendorService: VendorService) {}
 
   ngOnInit(): void {
     console.log('Event ID:', this.eventId);
-    // Hardcoded dummy data for demonstration
-    this.vendors = [
-      { name: 'Vendor A', spend: 50000 },
-      { name: 'Vendor B', spend: 40000 },
-      { name: 'Vendor C', spend: 30000 },
-      { name: 'Vendor D', spend: 20000 },
-      { name: 'Vendor E', spend: 10000 },
-      { name: 'Vendor F', spend: 5000 },
-      { name: 'Vendor G', spend: 8000 }
-    ];
+    this.fetchPayments();
+  }
 
-    // Sort vendors by spend in descending order
-    this.vendors.sort((a, b) => b.spend - a.spend);
-
-    // Set the highest and second highest vendors
-    if (this.vendors.length > 0) {
-      this.highestVendor = this.vendors[0];
+  ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
     }
+  }
 
-    if (this.vendors.length > 1) {
-      this.secondHighestVendor = this.vendors[1];
-    }
+  fetchPayments(): void {
+    this.vendorService.fetchAllPayments().subscribe((payments: Payment[]) => {
+      this.processPayments(payments);
+    }, error => {
+      console.error('Failed to fetch payments:', error);
+    });
+  }
+
+  processPayments(payments: Payment[]): void {
+    const vendorSpendMap = new Map<number, number>();
+
+    // Calculate total spend per vendor (using vendorId)
+    payments.forEach(payment => {
+      const currentSpend = vendorSpendMap.get(payment.vendorId) || 0;
+      vendorSpendMap.set(payment.vendorId, currentSpend + payment.amount);
+    });
+
+    // Fetch vendor names using their IDs
+    vendorSpendMap.forEach((spend, vendorId) => {
+      this.vendorService.fetchVendorById(vendorId).subscribe(vendor => {
+        this.vendors.push({ name: vendor.name, spend });
+        // Sort vendors by spend in descending order
+        this.vendors.sort((a, b) => b.spend - a.spend);
+
+        // Set the highest and second highest vendors
+        if (this.vendors.length > 0) {
+          this.highestVendor = this.vendors[0];
+        }
+
+        if (this.vendors.length > 1) {
+          this.secondHighestVendor = this.vendors[1];
+        }
+      }, error => {
+        console.error(`Failed to fetch vendor with ID ${vendorId}:`, error);
+      });
+    });
 
     // Start the interval to automatically iterate through the data
     this.intervalId = setInterval(() => {
       this.nextSet();
     }, 3000); // Change rows every 3 seconds
-  }
-
-  ngOnDestroy(): void {
-    // Clear the interval when the component is destroyed
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
   }
 
   nextSet(): void {
@@ -70,5 +85,4 @@ export class BudgetVendorsSubComponent {
 
   getVisibleVendors(): any[] {
     return this.vendors.slice(this.currentIndex, this.currentIndex + 5);
-  }
-}
+  }}

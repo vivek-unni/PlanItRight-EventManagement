@@ -5,62 +5,87 @@
 }
 
 body {
-    margin-top: 55px;
-    padding: 30px 10px 10px 10px;
     font-family: "Montserrat", system-ui;
     font-optical-sizing: auto;
-    font-style: normal;
-    /* background-image: url('/assets/bg-css.jpg'); */
-    background-color: aliceblue;
-    /* background: fixed; */
+    font-style: normal;    
+    background-color: #f0f4f8;
+    color: #2d3748;
+    line-height: 1.6;
+    margin-top: 60px;
+    padding: 30px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
 .details-pane {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin: 10px 30px;
-    padding: 50px 100px;
-    background-color: rgba(22, 69, 237, 0.689);
-    color: white;
-    font-family: "Montserrat", system-ui;
-    font-optical-sizing: auto;
-    font-style: normal;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    align-items: stretch;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    overflow: hidden;
 }
 
-/* .details-pane:hover {
-    background-color: rgb(90, 90, 90);
-    color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
-} */
-
-.budget-vendor-pane {
-    padding: 50px;
-    /*top | right | bottom | left */
-    /* padding: 50px 100px 50px 30px; */
-    border-radius: 30px;
-    width: 50%;
+.event-data, .total-rem-budget {
+    padding: 2rem;
+    flex: 1;
 }
 
-.guest-list-pane {
-    padding: 50px;
-    /* top | right | bottom | left */
-    /* padding: 50px 100px 50px 30px; */
-    border-radius: 30px;
-    width: 50%;
+.event-data {
+    background-color: #4a90e2;
+    color: #ffffff;
 }
 
-.schedule-pane{
-    padding: 0px 50px 50px 50px;
-    width: 100%
+.total-rem-budget {
+    background-color: #ffffff;
+    border-left: 1px solid #e2e8f0;
 }
 
-.vendor-and-guest{
+h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #4a5568;
+}
+
+h4 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.vendor-and-guest {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.budget-vendor-pane, .guest-list-pane, .schedule-pane {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    flex: 1;
+}
+
+.schedule-pane {
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .details-pane, .vendor-and-guest {
+        flex-direction: column;
+    }
 }

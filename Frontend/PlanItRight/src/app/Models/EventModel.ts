@@ -9,10 +9,11 @@ export class EventModel{
     location: string;
     type: string;
     budget: number;
+    username: string|null;
     tasks: Task[];
     guests: GuestModel[];
 
-    constructor(eventId: number, name: string, description: string, date: Date, location: string, type: string, budget: number, tasks: Task[] = [], guests: GuestModel[] = []) {
+    constructor(eventId: number, name: string,username:string|null, description: string, date: Date, location: string, type: string, budget: number, tasks: Task[] = [], guests: GuestModel[] = []) {
         this.eventId = eventId;
         this.name = name;
         this.description = description;
@@ -20,6 +21,7 @@ export class EventModel{
         this.location = location;
         this.type = type;
         this.budget = budget;
+        this.username=username;
         this.tasks = tasks;
         this.guests = guests;
     }
