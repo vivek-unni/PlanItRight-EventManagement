@@ -44,4 +44,9 @@ public class TaskController {
         return tasks;
     }
 
+    @GetMapping("/all")
+    public List<Task> getAllTasks() throws DatabaseException {
+        return taskService.getAllTasks();
+    }
+
 }

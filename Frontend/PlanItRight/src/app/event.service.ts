@@ -18,10 +18,12 @@ export class EventService {
 
   fetchEventsByUsername(username: string|null): Observable<EventModel[]> {
     let url = `${this.baseUrl}/events/${username}/all`;
+    // console.log(url)
     return this.http.get<EventModel[]>(url);
   }
 
   addEvent(event: EventModel): Observable<EventModel> {
+    // console.log(event)
     let url = `${this.baseUrl}/events/addEvent`;
     return this.http.post<EventModel>(url, event);
   }

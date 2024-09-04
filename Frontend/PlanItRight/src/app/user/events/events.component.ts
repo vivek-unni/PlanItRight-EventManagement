@@ -53,7 +53,9 @@ export class EventsComponent implements OnInit {
   async load() {
     try {
       const data = await lastValueFrom(this.eventService.fetchEventsByUsername(this.username));
-      this.eventData = data ?? []; // Default to an empty array if data is undefined
+      this.eventData = data ?? [];
+      console.log(data)
+       // Default to an empty array if data is undefined
       this.filteredEvents = this.eventData; // Initially, display all events
       console.log(this.eventData);
     } catch (error) {
@@ -84,7 +86,7 @@ export class EventsComponent implements OnInit {
   }
 
   // New method to handle event creation
-  onEventCreated(): void {
+  onEventCreated(): void {    
     this.load(); // Reload the event list after a new event is created
   }
 
