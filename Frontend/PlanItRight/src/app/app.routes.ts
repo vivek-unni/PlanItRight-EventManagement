@@ -8,6 +8,7 @@ import { BudgetVendorsComponent } from './user/events/budget-vendors/budget-vend
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { RsvpComponent } from './rsvp/rsvp.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 export const routes: Routes = [
     { path: 'events', component: EventsComponent, canActivate: [AuthGuard] },
@@ -20,5 +21,6 @@ export const routes: Routes = [
     // { path: '**', redirectTo: '/home' },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
-    { path: 'rsvp', component: RsvpComponent }
+    { path: 'rsvp', component: RsvpComponent },
+    {path : 'signup',component:RegistrationComponent}
 ];

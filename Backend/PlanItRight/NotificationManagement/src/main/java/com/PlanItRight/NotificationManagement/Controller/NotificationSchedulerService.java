@@ -61,8 +61,8 @@ public class NotificationSchedulerService {
     private void sendNotificationsForEvent(EventDTO event) {
         List<GuestDTO> guests = notificationClient.getAllGuestsFromEvent(event.getEventId());
         Notification notification = new Notification();
-        notification.setMessage("Reminder for your event tomorrow at " + event.getDate());
-        notification.setSubject("Event Reminder");
+        notification.setMessage("Reminder for the Event "+  event.getName() +"  at " + event.getDate() +" \n Just a quick reminder about the upcoming event! We're so excited and can't wait to see you there. It’s going to be a great time, and we’re looking forward to sharing it with you. Hope you can make it and be a part of the celebration!  ");
+        notification.setSubject(event.getName());
 
         for (GuestDTO guest : guests) {
             notificationService.sendEmailToGuest(notification, guest.getId(), event.getEventId());
