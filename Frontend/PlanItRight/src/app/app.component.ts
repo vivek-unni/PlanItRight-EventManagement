@@ -7,13 +7,13 @@ import { GuestlistComponent } from "./user/events/guestlist/guestlist.component"
 import { BudgetVendorsComponent } from "./user/events/budget-vendors/budget-vendors.component";
 import { ScheduleComponent } from "./user/events/schedule/schedule.component";
 import { LoginComponent } from './login/login.component';
-import { RegistrationComponent } from './registration/registration.component';
+// import { RegistrationComponent } from './registration/registration.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomepageComponent, EventsComponent, DashboardComponent, GuestlistComponent, BudgetVendorsComponent, ScheduleComponent,LoginComponent , RegistrationComponent],
+  imports: [RouterOutlet, HomepageComponent, EventsComponent, DashboardComponent, GuestlistComponent, BudgetVendorsComponent, ScheduleComponent,LoginComponent ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
