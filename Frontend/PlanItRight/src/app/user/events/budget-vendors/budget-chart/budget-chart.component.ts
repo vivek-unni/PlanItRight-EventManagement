@@ -44,7 +44,7 @@ export class BudgetChartComponent implements AfterViewChecked, OnInit, OnDestroy
 
   ngOnInit(): void {
     this.loadEventAndPayments();
-    console.log('Event ID:', this.eventId);
+    console.log('Budget Chart Event ID:', this.eventId);
   }
 
   loadEventAndPayments(): void {
@@ -85,7 +85,7 @@ export class BudgetChartComponent implements AfterViewChecked, OnInit, OnDestroy
   }
 
   ngAfterViewChecked(): void {
-    console.log('Budget Data:', this.budgetData); // Debugging log
+    // console.log('Budget Data:', this.budgetData); // Debugging log
 
     if (this.budgetData && this.budgetData.vendors && this.budgetData.vendors.length > 0 && !this.chartInitialized && this.budgetChartRef) {
       this.createChart(this.visibleVendors);

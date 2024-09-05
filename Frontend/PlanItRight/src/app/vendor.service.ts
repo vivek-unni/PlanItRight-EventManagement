@@ -21,5 +21,18 @@ export class VendorService {
   fetchAllPayments(): Observable<Payment[]> {
     return this.http.get<Payment[]>(this.paymentApiUrl);
   }
+
+  fetchAllVendors(): Observable<VendorModel[]> {
+    
+    return this.http.get<VendorModel[]>(`${this.vendorApiUrl}/all`);
+  }
+
+  addPayment(vendorId: number, eventId: number, paymentsData: {dueDate: string, amount: string, status: string}): Observable<any> {
+   
+    const url = `http://localhost:7000/api/payments/vendors/${vendorId}/events/${eventId}`;
+    return this.http.post(url, paymentsData); 
+}
+
+  
 }
   

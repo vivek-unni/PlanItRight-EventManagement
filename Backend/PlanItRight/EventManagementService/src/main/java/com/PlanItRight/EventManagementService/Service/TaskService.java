@@ -50,23 +50,6 @@ public class TaskService {
         taskRepository.delete(task);
     }
 
-//    public List<Task> getAllTasksFromEvent( Long id)
-//    {
-//        Optional<Event> optionalEvent = eventRepository.findById(id);
-//        if (optionalEvent.isPresent()) {
-//            Event event = optionalEvent.get();
-//            return event.getTasks();
-//        }
-//        return null;
-//
-//    }
-
-//    public List<Task> getAllTasksFromEvent(Long eventId) throws ResourceNotFoundException {
-//        Event event = eventRepository.findById(eventId)
-//                .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + eventId));
-//
-//        return event.getTasks();
-//    }
 
     public List<TaskProjection> getTasksByEventId(Long eventId) throws ResourceNotFoundException {
         List<TaskProjection> tasks = taskRepository.findAllByEventId(eventId);

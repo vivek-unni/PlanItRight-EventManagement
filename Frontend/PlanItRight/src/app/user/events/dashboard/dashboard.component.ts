@@ -30,6 +30,7 @@ export class DashboardComponent {
     this.eventId = Number(this.route.snapshot.paramMap.get('eventId'));
     console.log('Event ID:', this.eventId);
     localStorage.setItem('eventId', this.eventId.toString());
+    // localStorage.setItem('eventId')
 
     // Fetch event details using the event ID
     this.fetchEventDetails();

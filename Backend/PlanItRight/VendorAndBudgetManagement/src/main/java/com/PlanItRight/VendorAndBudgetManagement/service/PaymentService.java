@@ -24,6 +24,7 @@ public class PaymentService {
     private VendorRepository vendorRepository;
 
     public List<PaymentProjection> getAllPayments() {
+
         return paymentRepository.findAllPayments();
     }
 
