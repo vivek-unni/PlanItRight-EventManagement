@@ -16,4 +16,8 @@ export class HomepageComponent {
   login(){
     this.router.navigate(['events']);
   }
+
+  registration(){
+    this.router.navigate(['signup']);
+  }
 }

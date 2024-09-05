@@ -1,48 +1,108 @@
-<!-- <div class="container">
-    <h2>Registration</h2>
-    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="fullname">Full Name</label>
-        <input type="text" id="fullname" formControlName="fullname" class="form-control" />
-        <div *ngIf="submitted && f.fullname.errors">
-          <small class="text-danger" *ngIf="f.fullname.errors.required">Full Name is required</small>
+<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5"> <!-- Reduced width to 5 columns -->
+        <div class="card shadow-sm border-0 rounded-lg"> <!-- Reduced shadow and added border radius -->
+          <div class="card-body p-4"> <!-- Reduced padding -->
+            <h2 class="text-center mb-3 login-title"><strong>PlanItRight.</strong></h2> <!-- Adjusted bottom margin -->
+
+            <form (ngSubmit)="registration()" #loginForm="ngForm" novalidate>
+              <div class="mb-2"> <!-- Reduced bottom margin -->
+                <label for="fullnameInput" class="form-label">Full Name</label>
+                <input
+                  type="text"
+                  id="fullnameInput"
+                  name="fullname"
+                  [(ngModel)]="registrationData.fullname"
+                  #fullname="ngModel"
+                  required
+                  class="form-control form-control-sm" 
+                />
+              </div>
+
+              <div class="mb-2">
+                <label for="phoneInput" class="form-label">Phone</label>
+                <input
+                  type="text"
+                  id="phoneInput"
+                  name="phone"
+                  [(ngModel)]="registrationData.phone"
+                  #phone="ngModel"
+                  required
+                  class="form-control form-control-sm"
+                />
+              </div>
+
+              <div class="mb-2">
+                <label for="emailInput" class="form-label">Email</label>
+                <input
+                  type="email"
+                  id="emailInput"
+                  name="email"
+                  [(ngModel)]="registrationData.email"
+                  #email="ngModel"
+                  required
+                  class="form-control form-control-sm"
+                />
+              </div>
+
+              <!-- Row for Username and Password -->
+              <div class="row">
+                <div class="col-md-6 mb-2">
+                  <label for="usernameInput" class="form-label">Username</label>
+                  <input
+                    type="text"
+                    id="usernameInput"
+                    name="username"
+                    [(ngModel)]="registrationData.username"
+                    #username="ngModel"
+                    required
+                    class="form-control form-control-sm"
+                  />
+                  <div *ngIf="username.invalid && (username.dirty || username.touched)" class="text-danger">
+                    Username is required
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-2">
+                  <label for="passwordInput" class="form-label">Password</label>
+                  <input
+                    type="password"
+                    id="passwordInput"
+                    name="password"
+                    [(ngModel)]="registrationData.password"
+                    #password="ngModel"
+                    required
+                    class="form-control form-control-sm"
+                  />
+                  <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">
+                    Password is required
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-grid">
+                <button
+                  type="submit"
+                  [disabled]="!loginForm.valid"
+                  class="btn btn-primary btn-block login-btn"
+                >
+                  Register
+                </button>
+              </div>
+
+              <div *ngIf="registrationError" class="text-danger text-center mt-3 error-text">
+                {{ registrationError }}
+              </div>
+
+              <!-- Already a member section -->
+              <div class="text-center mt-2">
+                <p>Already a member? <a href="/login" class="text-primary">Sign in</a></p>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-  
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" formControlName="username" class="form-control" />
-        <div *ngIf="submitted && f.username.errors">
-          <small class="text-danger" *ngIf="f.username.errors.required">Username is required</small>
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="phone">Phone</label>
-        <input type="text" id="phone" formControlName="phone" class="form-control" />
-        <div *ngIf="submitted && f.phone.errors">
-          <small class="text-danger" *ngIf="f.phone.errors.required">Phone is required</small>
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" formControlName="email" class="form-control" />
-        <div *ngIf="submitted && f.email.errors">
-          <small class="text-danger" *ngIf="f.email.errors.required">Email is required</small>
-          <small class="text-danger" *ngIf="f.email.errors.email">Enter a valid email address</small>
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" formControlName="password" class="form-control" />
-        <div *ngIf="submitted && f.password.errors">
-          <small class="text-danger" *ngIf="f.password.errors.required">Password is required</small>
-        </div>
-      </div>
-  
-      <button type="submit" class="btn btn-primary">Register</button>
-    </form>
+    </div>
   </div>
-   -->
+</body>
