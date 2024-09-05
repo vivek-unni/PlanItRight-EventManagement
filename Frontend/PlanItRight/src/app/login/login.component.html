@@ -6,12 +6,12 @@
    
     <form (ngSubmit)="login()" #loginForm="ngForm" novalidate>
       <div class="form-group">
-        <label for="usernameInput" class="form-label">Username</label>
+        <label for="usernameInput" class="form-label">Email</label>
         <input
-          type="text"
-          id="usernameInput"
-          name="username"
-          [(ngModel)]="loginData.username"
+          type="email"
+          id="emailInput"
+          name="email"
+          [(ngModel)]="loginData.email"
           #username="ngModel"
           required
           class="form-input"

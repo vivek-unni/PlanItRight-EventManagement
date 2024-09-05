@@ -26,13 +26,15 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long eventId;
-    private String username;
+    private String email;
     private String name;
     private String description;
     private Date date;
     private String location;
     private String type;
     private Long budget;
+
+    //    private String username;
 
 
     @OneToMany

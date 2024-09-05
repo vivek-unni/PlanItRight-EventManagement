@@ -16,8 +16,8 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public boolean authenticate(String username, String password) {
-        AppUser user = userRepository.findByUsername(username);
+    public boolean authenticate(String email, String password) {
+        AppUser user = userRepository.findByEmail(email);
         if (user != null) {
             return passwordEncoder.matches(password, user.getPassword());
         }
@@ -45,6 +45,15 @@ public class UserService {
             return appUser;
         } else {
             throw new RuntimeException("User not found with username: " + username);
+        }
+    }
+
+    public Object getUserByEmail(String email) {
+        AppUser appUser = userRepository.findByEmail(email);
+        if (appUser!= null) {
+            return appUser;
+        } else {
+            throw new RuntimeException("User not found with email: " + email);
         }
     }
 }

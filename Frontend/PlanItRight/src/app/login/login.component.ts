@@ -15,7 +15,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent {
   // , { queryParams: { username: this.loginData.username } }
  
-  loginData = { username: '', password: '' };
+  loginData = { email: '', password: '' };
   loginError: string | null = null;
   isAuthenticated: boolean = false;
   constructor(private authService: AuthService, private router: Router) {}
@@ -25,9 +25,9 @@ export class LoginComponent {
       () => {
         // Navigate to the dashboard after successful login
         console.log("HIi")
-        this.router.navigate(['events']);
-        localStorage.setItem('username', this.loginData.username);
+        localStorage.setItem('email', this.loginData.email);
         this.isAuthenticated = true;
+        this.router.navigate(['events']);
       },
       error => {
         console.error('Login failed:', error);

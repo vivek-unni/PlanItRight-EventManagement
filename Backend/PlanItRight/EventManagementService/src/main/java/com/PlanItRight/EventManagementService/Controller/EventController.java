@@ -47,8 +47,13 @@ public class EventController {
         eventService.deleteEvent(id);
    }
 
-    @GetMapping("/{username}/all")
-    public List<Event> getAllEventsByUsername(@PathVariable String username) {
-        return eventService.getAllEventsByUsername(username);
+//    @GetMapping("/{username}/all")
+//    public List<Event> getAllEventsByUsername(@PathVariable String username) {
+//        return eventService.getAllEventsByUsername(username);
+//    }
+
+    @GetMapping("/{email}/all")
+    public List<Event> getAllEventsByEmail(@PathVariable String email) {
+        return eventService.getAllEventsByEmail(email);
     }
 }
