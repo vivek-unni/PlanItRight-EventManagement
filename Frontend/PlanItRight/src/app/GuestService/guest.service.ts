@@ -16,4 +16,8 @@ export class GuestService {
     const url = `${this.baseUrl}/${eventId}/all`;
     return this.http.get<GuestModel[]>(url);
   }
+
+  addGuest(eventId: number, guest: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/${eventId}/add`, guest);
+  }
 }
