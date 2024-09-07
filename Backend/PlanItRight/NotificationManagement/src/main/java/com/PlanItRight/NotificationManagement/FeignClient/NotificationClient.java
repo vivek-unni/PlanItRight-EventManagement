@@ -14,7 +14,7 @@ import java.util.List;
 public interface NotificationClient {
 
     @GetMapping("/api/guests/{eventId}/all")
-    public List<GuestDTO> getAllGuestsFromEvent(@PathVariable Long eventId) ;
+    public List<GuestDTO> getAllGuestsByEventId(@PathVariable Long eventId) ;
 
     @GetMapping("/api/events/all")
     public List<EventDTO> getAllEvents();

@@ -21,15 +21,8 @@ public class Guest {
     private String name;
     private String email;
     private String rsvpStatus;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "event_id", nullable = false)
-//    @JsonIgnore
-//    private com.PlanItRight.EventManagementService.model.Event event;
+    private Long eventRef;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "event_id", nullable = false)
-//    private Event event;
 }
 
 

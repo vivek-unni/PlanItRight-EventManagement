@@ -8,8 +8,6 @@ import com.PlanItRight.EventManagementService.repository.EventRepository;
 import com.PlanItRight.EventManagementService.repository.GuestRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +31,10 @@ public class GuestService {
             Event event = eventRepository.findById(eventId)
                     .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + eventId));
 
-            event.getGuests().add(guest);
-            guestRepository.save(guest);
+//            event.getGuests().add(guest);
+            Guest createdGuest = guestRepository.save(guest);
+            createdGuest.setEventRef(eventId);
+            guestRepository.save(createdGuest);
             eventRepository.save(event);
             return guest;
 
@@ -55,12 +55,43 @@ public class GuestService {
         guestRepository.delete(guest);
     }
 
-    public List<Guest> getAllGuestsFromEvent(Long eventId) throws ResourceNotFoundException {
-        Event event = eventRepository.findById(eventId)
-                .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + eventId));
+//    public List<Guest> getAllGuestsFromEvent(Long eventId) throws ResourceNotFoundException {
+//        Event event = eventRepository.findById(eventId)
+//                .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + eventId));
+//
+//        return event.getGuests();
+//    }
 
-        return event.getGuests();
+    public List<Guest> getAllGuestsFromEvent(Long eventId) throws ResourceNotFoundException{
+        return guestRepository.findByEventRef(eventId);
     }
+
+    public Guest updateRsvpStatus(Long eventId, String email, String rsvpStatus) throws ResourceNotFoundException {
+        List<Guest> guestListByEventId = guestRepository.findByEventRef(eventId);
+        Guest newGuest = null;
+        for (Guest guest : guestListByEventId) {
+            if (guest.getEmail().equals(email)) {
+                guest.setRsvpStatus(rsvpStatus);
+                guestRepository.save(guest);
+                newGuest = guest;
+            }
+        }
+        return newGuest;
+    }
+
+    public Guest updateRsvp(Long guestId, String rsvpStatus) throws ResourceNotFoundException {
+        Optional<Guest> guestOptional = guestRepository.findById(guestId);
+
+        if (guestOptional.isPresent()) {
+            Guest guest = guestOptional.get();
+            guest.setRsvpStatus(rsvpStatus);
+            return guestRepository.save(guest);
+        } else {
+            throw new ResourceNotFoundException("Guest not found with id: " + guestId);
+        }
+    }
+
+
 
 
 //    @Transactional
@@ -78,6 +109,20 @@ public class GuestService {
 //            return guestRepository.save(guest);
 //        } else {
 //            throw new ResourceNotFoundException("Guest not found with email " + email + " for event with id " + eventId);
+//        }
+//    }
+
+//    public String updateRsvpStatus(Long eventId, String email, String newStatus) {
+//        GuestProjection guestProjection = guestRepository.findByEventIdAndEmail(eventId, email);
+//
+//        if (guestProjection != null && guestProjection.getEventId().equals(eventId)) {
+//            // Fetch the full Guest entity and update the RSVP status (by email)
+//            Guest guest = guestRepository.findByEmail(email);
+//            guest.setRsvpStatus(newStatus);
+//            guestRepository.save(guest);
+//            return "RSVP status updated successfully to " + newStatus;
+//        } else {
+//            return "Invalid event ID for the provided email";
 //        }
 //    }
 }

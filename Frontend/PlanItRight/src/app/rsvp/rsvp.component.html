@@ -12,10 +12,10 @@
         <label>Will you attend?</label>
         <div class="radio-group">
           <label>
-            <input type="radio" formControlName="attending" value="yes"> Yes
+            <input type="radio" formControlName="attending" value="accepted"> Yes
           </label>
           <label>
-            <input type="radio" formControlName="attending" value="no"> No
+            <input type="radio" formControlName="attending" value="rejected"> No
           </label>
         </div>
         <div *ngIf="rsvpForm.get('attending')?.invalid && (rsvpForm.get('attending')?.dirty || rsvpForm.get('attending')?.touched)" class="error-message">

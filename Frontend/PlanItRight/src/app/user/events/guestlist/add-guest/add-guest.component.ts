@@ -13,6 +13,7 @@ import { GuestService } from '../../../../GuestService/guest.service';
 export class AddGuestComponent {
 
   @Output() closePopup = new EventEmitter<void>();
+  @Output() guestAdded = new EventEmitter<void>();  // New EventEmitter
 
   eventIdget = localStorage.getItem('eventId');
   eventId = Number(this.eventIdget);

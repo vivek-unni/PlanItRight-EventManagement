@@ -20,4 +20,8 @@ export class GuestService {
   addGuest(eventId: number, guest: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/${eventId}/add`, guest);
   }
+
+  changeRsvpStatus(eventId: number, email:string, rsvpstatus:string){
+    return this.http.put(`${this.baseUrl}/${eventId}/${email}/rsvpStatus?rsvpStatus=${rsvpstatus}`,{});
+  }
 }

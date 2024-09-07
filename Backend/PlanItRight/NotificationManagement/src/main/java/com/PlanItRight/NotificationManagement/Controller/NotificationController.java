@@ -18,4 +18,5 @@ public class NotificationController {
         notificationService.sendEmailToGuest(notification , guestId , eventId);
         return "Success";
     }
+
 }
