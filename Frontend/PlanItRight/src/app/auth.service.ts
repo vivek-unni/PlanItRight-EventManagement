@@ -33,6 +33,7 @@ export class AuthService {
         localStorage.setItem('token', response.token);
         localStorage.setItem('userId', response.user.id);
         localStorage.setItem('user', JSON.stringify(response.user));
+        localStorage.setItem('isLoggedin', "true");
         this.loggedIn.next(true);
       })
     );
@@ -43,6 +44,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('user');
+    localStorage.removeItem('isLoggedin');
     this.loggedIn.next(false);
   }
 

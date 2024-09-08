@@ -22,6 +22,7 @@ public class Vendor {
     private String serviceType;
     private String contactInfo;
     private String status;
+    private String userEmail;
     private String location;
 }
 

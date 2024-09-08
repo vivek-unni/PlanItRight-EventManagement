@@ -197,6 +197,10 @@ p.budget-over {
     width:40px;
 }
 
+.add-payment{
+    width:40px;
+}
+
 .expenses {
     display: flex;
     flex-wrap: wrap;

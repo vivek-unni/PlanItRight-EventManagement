@@ -20,4 +20,15 @@ export class HomepageComponent {
   registration(){
     this.router.navigate(['signup']);
   }
+
+  checkLogin(){
+    console.log(localStorage.getItem('isLoggedin'));
+    if(localStorage.getItem('isLoggedin')){
+      this.router.navigate(['events']);
+    }
+    else{
+      this.router.navigate(['login']);
+    }
+  
+  }
 }

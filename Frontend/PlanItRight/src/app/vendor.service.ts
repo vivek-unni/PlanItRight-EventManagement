@@ -33,6 +33,10 @@ export class VendorService {
     return this.http.post(url, paymentsData); 
 }
 
+addVendor(vendorData: VendorModel): Observable<VendorModel> {
+  console.log("Hello Hii"+vendorData); 
+  return this.http.post<VendorModel>(`${this.vendorApiUrl}/add`, vendorData);
+}
   
 }
   

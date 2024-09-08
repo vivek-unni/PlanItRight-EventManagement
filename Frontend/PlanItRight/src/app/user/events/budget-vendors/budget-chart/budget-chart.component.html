@@ -23,7 +23,10 @@
             <button type="submit" class="searchButton" title="Search">
             </button>
           </div>
-          <a href="javascript:void(0)" (click)="openPopup()"><img src="/assets/icons8-add-64.png" class="add-vendor" alt="" title="Add Vendor"></a>
+          <a href="javascript:void(0)" (click)="openPopup()"><img src="/assets/icons8-add-64.png" class="add-payment" alt="" title="Add Payment"></a>
+          <a href="javascript:void(0)" (click)="openVendorPopup()">
+            <img src="/assets/add.png" class="add-vendor" alt="" title="Add Vendor">
+          </a>
     </div>
 
     <div class="expenses">
@@ -39,3 +42,4 @@
 </div>
 
 <app-vendors *ngIf="isPopupOpen" (closePopup)="closePopup()"></app-vendors>
+<app-add-vendor></app-add-vendor>

@@ -6,19 +6,25 @@ import { VendorsComponent } from "../vendors/vendors.component";
 import { VendorService } from '../../../../vendor.service';
 import { forkJoin, map } from 'rxjs';
 import { EventService } from '../../../../event.service';
+import { AddVendorComponent } from '../../../../add-vendor/add-vendor.component';
+
 
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, BarController, LineElement, LineController , PointElement);
 
 @Component({
   selector: 'app-budget-chart',
   standalone: true,
-  imports: [CommonModule, VendorsComponent],
+  imports: [CommonModule, VendorsComponent, AddVendorComponent],
   templateUrl: './budget-chart.component.html',
   styleUrls: ['./budget-chart.component.css']
 })
 
 export class BudgetChartComponent implements AfterViewChecked, OnInit, OnDestroy {
   @ViewChild('budgetChart', { static: false }) budgetChartRef!: ElementRef<HTMLCanvasElement>;
+
+  @ViewChild(AddVendorComponent) addVendorComponent!: AddVendorComponent;
+
+
 
   budgetData: any;
   chart: Chart | null = null;
@@ -236,5 +242,24 @@ export class BudgetChartComponent implements AfterViewChecked, OnInit, OnDestroy
   closePopup(): void {
     this.isPopupOpen = false;
   }
+
+  isVendorPopupOpen: boolean = false;
+
+  openVendorPopup() {
+    if (this.addVendorComponent) {
+      this.addVendorComponent.openPopup(); // Calls openPopup of AddVendorComponent
+    } else {
+      console.error("AddVendorComponent is not initialized.");
+    }
+  }
+
+  closeVendorPopup() {
+    if (this.addVendorComponent) {
+      this.addVendorComponent.closePopup(); // Calls closePopup of AddVendorComponent
+    } else {
+      console.error("AddVendorComponent is not initialized.");
+    }
+  }
+  
 
 }
