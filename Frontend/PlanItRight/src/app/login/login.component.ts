@@ -22,17 +22,17 @@ export class LoginComponent {
   print() {
     // Update auth object with the latest values of email and password
     const auth = {
-      emailaddress: this.email,
+      username: this.email,
       password: this.password
     };
     
-    console.log(auth.emailaddress + ' ' + auth.password);
+    console.log(auth.username + ' ' + auth.password);
     this.loadToken(auth);
   }
 
   token: string | null = null;
 
-  loadToken(auth: { emailaddress: string; password: string }) {
+  loadToken(auth: { username: string; password: string }) {
     this.loginService.getToken(auth).subscribe(
       (data) => {
         console.log("Data  "+data.token)
@@ -53,7 +53,7 @@ export class LoginComponent {
       'Authorization': 'Bearer ' + this.token
     });
 
-    const url = 'http://localhost:9099/login';
+    const url = 'http://localhost:7000/api/login';
     this.loginService.sendAuthenticatedRequest(url, headers).subscribe(
       (data) => {
         console.log('Authenticated Request Successful:', data);

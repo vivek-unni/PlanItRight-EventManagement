@@ -1,27 +1,36 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 import { GuestService } from '../GuestService/guest.service';
 
 @Component({
   selector: 'app-rsvp',
   standalone: true,
-  imports: [ReactiveFormsModule,NgIf],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './rsvp.component.html',
-  styleUrl: './rsvp.component.css'
+  styleUrls: ['./rsvp.component.css']  // Corrected to 'styleUrls' for array
 })
-export class RsvpComponent implements OnInit{
+export class RsvpComponent implements OnInit {
   
   rsvpForm!: FormGroup;
+  eventId!: number;  // Declare eventId
 
-  // eventIdget=localStorage.getItem('eventId');
-  // eventId=Number(this.eventIdget)
-
-  
-  constructor(private formBuilder: FormBuilder,private rsvpService:GuestService) {}
-
+  constructor(
+    private formBuilder: FormBuilder,
+    private rsvpService: GuestService,
+    private route: ActivatedRoute  // Inject ActivatedRoute
+  ) {}
 
   ngOnInit() {
+    // Get eventId from route parameters
+    this.route.params.subscribe(params => {
+      this.eventId = +params['eventId'];  // Convert to number
+      this.initializeForm();
+    });
+  }
+
+  initializeForm() {
     this.rsvpForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       attending: ['', Validators.required]
@@ -31,11 +40,22 @@ export class RsvpComponent implements OnInit{
   onSubmit() {
     if (this.rsvpForm.valid) {
       console.log('RSVP submitted:', this.rsvpForm.value);
-      // Here you would typically send this data to your backend
-      // For example: this.rsvpService.submitRsvp(this.rsvpForm.value).subscribe(...)
-      this.rsvpService.changeRsvpStatus(this.eventId,this.rsvpForm.get('email')?.value,this.rsvpForm.get('attending')?.value)
-      alert('Thank you for your RSVP!');
-      this.rsvpForm.reset();
+      // Send RSVP data along with eventId
+      this.rsvpService.changeRsvpStatus(
+        this.eventId,
+        this.rsvpForm.get('email')?.value,
+        this.rsvpForm.get('attending')?.value
+      ).subscribe(
+        response => {
+          console.log('RSVP status updated:', response);
+          alert('Thank you for your RSVP!');
+          this.rsvpForm.reset();
+        },
+        error => {
+          console.error('Error updating RSVP status:', error);
+          alert('There was an error submitting your RSVP.');
+        }
+      );
     }
   }
 }

@@ -18,8 +18,8 @@ export class LoginService {
     );
   }
 
-  getToken(credentials: { emailaddress: string; password: string }): Observable<any> {
-    let url = "http://localhost:7000/login";
+  getToken(credentials: { username: string; password: string }): Observable<any> {
+    let url = "http://localhost:7000/api/login";
     console.log("Sending request to:", url);
     console.log("Credentials:", credentials);
     return this.http.post(url, credentials).pipe(

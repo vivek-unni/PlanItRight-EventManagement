@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { RegistrationService } from '../registration.service';
+import { NgIf } from '@angular/common';
 // Import your registration service
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   standalone: true,
-  imports: [FormBuilder, HttpClient, Validators] // Include necessary imports directly in the component
+  imports: [ReactiveFormsModule,NgIf] // Include necessary imports directly in the component
 })
 export class RegistrationComponent {
   registrationForm: FormGroup;
