@@ -57,15 +57,23 @@ public class EventService {
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + id));
     }
 
-//    public List<Event> getAllEventsByUsername(String username) {
-//
-//        return eventRepository.findAllByUsername(username);
-//    }
-
-    public List<Event> getAllEventsByEmail(String email){
-        return eventRepository.findAllByEmail(email);
-
+    public List<Event> getAllEventsByUsername(String username) {
+        return eventRepository.findAllByUsername(username);
     }
+
+
+//    public Task addTaskToEvent(Long eventId, Task task) {
+//        Optional<Event> optionalEvent = eventRepository.findById(eventId);
+//        if (optionalEvent.isPresent()) {
+//            Event event = optionalEvent.get();
+//            event.getTasks().add(task);
+//            taskRepository.save(task);
+//            eventRepository.save(event);
+//            return task;
+//        }
+//
+//        return null;
+//    }
 
 
 

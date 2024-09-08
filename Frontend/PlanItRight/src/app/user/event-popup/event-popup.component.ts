@@ -21,7 +21,7 @@ export class EventPopupComponent {
   eventDescription: string = '';
   eventBudget: number = 0;
   eventType: string = '';
-  email=localStorage.getItem('email');
+  username=localStorage.getItem('username');
   
   constructor(private eventService: EventService) {}
 
@@ -38,7 +38,7 @@ export class EventPopupComponent {
         description: this.eventDescription,
         budget: this.eventBudget,
         type: this.eventType,
-        email:this.email,
+        username:this.username,
         eventId: 0,
         tasks: [],
         guests: []

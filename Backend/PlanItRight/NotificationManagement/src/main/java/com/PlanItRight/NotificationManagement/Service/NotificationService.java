@@ -36,8 +36,7 @@ public class NotificationService {
     public void sendEmailToGuest(Notification notification, Long guestId , Long eventId) {
 
 
-        System.out.println("HII");
-       List<GuestDTO> allGuests =notificationClient.getAllGuestsFromEvent(eventId);
+       List<GuestDTO> allGuests =notificationClient.getAllGuestsByEventId(eventId);
        GuestDTO guest = allGuests.stream().filter(g -> g.getId().equals(guestId)).findFirst().orElse(null);
        if(guest!=null){
 

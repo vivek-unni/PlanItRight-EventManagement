@@ -4,7 +4,6 @@ import com.PlanItRight.VendorAndBudgetManagement.exception.VendorNotFoundExcepti
 import com.PlanItRight.VendorAndBudgetManagement.model.Vendor;
 import com.PlanItRight.VendorAndBudgetManagement.repository.VendorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,18 +49,6 @@ public class VendorService {
     }
 
     public List<Vendor> getAllVendors() {
-        try {
-            return vendorRepository.findAll();
-        } catch (DataAccessException e) {
-            throw new RuntimeException("Failed to retrieve all vendors due to database error: " + e.getMessage(), e);
-        }
-    }
-
-    public List<Vendor> addAllVendors(List<Vendor> vendors) {
-        try {
-            return vendorRepository.saveAll(vendors);
-        } catch (DataAccessException e) {
-            throw new RuntimeException("Failed to add vendors due to database error: " + e.getMessage(), e);
-        }
+        return vendorRepository.findAll();
     }
 }

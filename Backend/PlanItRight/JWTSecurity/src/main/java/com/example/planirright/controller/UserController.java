@@ -54,10 +54,10 @@ public class UserController {
     public ResponseEntity<Map<String, Object>> login(@RequestBody AppUser appUser) {
         Map<String, Object> response = new HashMap<>();
         
-        if (userService.authenticate(appUser.getEmail(), appUser.getPassword())) {
-            String token = jwtService.generateToken(appUser.getEmail());
+        if (userService.authenticate(appUser.getUsername(), appUser.getPassword())) {
+            String token = jwtService.generateToken(appUser.getUsername());
             response.put("token", token); // Include the token in the response
-            response.put("user",userService.getUserByEmail(appUser.getEmail()));
+            response.put("user",userService.getUserByUsername(appUser.getUsername()));
             return ResponseEntity.ok(response);
         } else {
             response.put("error", "Invalid credentials");

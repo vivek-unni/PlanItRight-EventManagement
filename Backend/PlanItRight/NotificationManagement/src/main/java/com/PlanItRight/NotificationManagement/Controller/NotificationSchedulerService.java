@@ -1,63 +1,3 @@
-package com.PlanItRight.NotificationManagement.Controller;
-
-import com.PlanItRight.NotificationManagement.DTO.EventDTO;
-import com.PlanItRight.NotificationManagement.DTO.GuestDTO;
-import com.PlanItRight.NotificationManagement.FeignClient.NotificationClient;
-import com.PlanItRight.NotificationManagement.Model.Notification;
-import com.PlanItRight.NotificationManagement.Service.NotificationService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
-
-@Service
-public class NotificationSchedulerService {
-
-    @Autowired
-    private NotificationClient notificationClient;
-
-    @Autowired
-    private NotificationService notificationService;
-
-    @Scheduled(fixedRate = 6000) // Run every minute
-    public void checkAndSendNotifications() {
-        System.out.println("Hii 1");
-        List<EventDTO> events = notificationClient.getAllEvents();
-        LocalDateTime now = LocalDateTime.now();
-
-        for (EventDTO event : events) {
-            System.out.println("Hii 2");
-            LocalDateTime eventDateTime = event.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime().withHour(11).withMinute(0);
-
-            if (ChronoUnit.HOURS.between(now, eventDateTime) <= 24) {
-                System.out.println("Hii 3");
-                System.out.println("Sending notifications for event: " + event.getEventId());
-                sendNotificationsForEvent(event);
-            }
-        }
-    }
-
-    private void sendNotificationsForEvent(EventDTO event) {
-        System.out.println("Hii 4");
-        List<GuestDTO> guests = notificationClient.getAllGuestsFromEvent(event.getEventId());
-        Notification notification = new Notification();
-        notification.setMessage("Reminder for the Event " + event.getName() + " at " + event.getDate() +
-                "\n Just a quick reminder about the upcoming event! We're so excited and can't wait to see you there.");
-        notification.setSubject(event.getName());
-
-        for (GuestDTO guest : guests) {
-            System.out.println("Hii 5");
-            notificationService.sendEmailToGuest(notification, guest.getId(), event.getEventId());
-        }
-    }
-}
-
-
-
 //package com.PlanItRight.NotificationManagement.Controller;
 //
 //import com.PlanItRight.NotificationManagement.DTO.EventDTO;
@@ -96,7 +36,7 @@ public class NotificationSchedulerService {
 //            checkAndSendNotifications();
 //            try {
 //                System.out.println("Checking notifications at " + LocalDateTime.now());
-//                Thread.sleep(600000000); // Check every minute
+//                Thread.sleep(60000); // Check every minute
 //            } catch (InterruptedException e) {
 //                System.err.println("Thread was interrupted: " + e.getMessage());
 //                Thread.currentThread().interrupt();
@@ -119,7 +59,7 @@ public class NotificationSchedulerService {
 //    }
 //
 //    private void sendNotificationsForEvent(EventDTO event) {
-//        List<GuestDTO> guests = notificationClient.getAllGuestsFromEvent(event.getEventId());
+//        List<GuestDTO> guests = notificationClient.getAllGuestsByEventId(event.getEventId());
 //        Notification notification = new Notification();
 //        notification.setMessage("Reminder for the Event "+  event.getName() +"  at " + event.getDate() +" \n Just a quick reminder about the upcoming event! We're so excited and can't wait to see you there. It’s going to be a great time, and we’re looking forward to sharing it with you. Hope you can make it and be a part of the celebration!  ");
 //        notification.setSubject(event.getName());
@@ -129,5 +69,3 @@ public class NotificationSchedulerService {
 //        }
 //    }
 //}
-//
-//

@@ -22,11 +22,6 @@ export class EventService {
     return this.http.get<EventModel[]>(url);
   }
 
-  fetchEventsByEmail(email : string|null): Observable<EventModel[]> {
-    let url = `${this.baseUrl}/events/${email}/all`;
-    return this.http.get<EventModel[]>(url);
-  }
-
   addEvent(event: EventModel): Observable<EventModel> {
     // console.log(event)
     let url = `${this.baseUrl}/events/addEvent`;

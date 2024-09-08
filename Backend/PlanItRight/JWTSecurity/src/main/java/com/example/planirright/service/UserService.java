@@ -16,8 +16,8 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public boolean authenticate(String email, String password) {
-        AppUser user = userRepository.findByEmail(email);
+    public boolean authenticate(String username, String password) {
+        AppUser user = userRepository.findByUsername(username);
         if (user != null) {
             return passwordEncoder.matches(password, user.getPassword());
         }
@@ -27,9 +27,6 @@ public class UserService {
     public void registerUser(AppUser appUser) {
         if (userRepository.existsByUsername(appUser.getUsername())) {
             throw new RuntimeException("Username already exists!");
-        }
-        else if(userRepository.existsByEmail(appUser.getEmail())) {
-            throw new RuntimeException("Email already exists!");
         }
         appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
         userRepository.save(appUser);
@@ -45,15 +42,6 @@ public class UserService {
             return appUser;
         } else {
             throw new RuntimeException("User not found with username: " + username);
-        }
-    }
-
-    public Object getUserByEmail(String email) {
-        AppUser appUser = userRepository.findByEmail(email);
-        if (appUser!= null) {
-            return appUser;
-        } else {
-            throw new RuntimeException("User not found with email: " + email);
         }
     }
 }

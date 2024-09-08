@@ -25,13 +25,6 @@ public class VendorController {
     }
 
 
-    @PostMapping("/addAll")
-    public ResponseEntity<List<Vendor>> addAllVendors(@RequestBody List<Vendor> vendors)
-    {
-        return ResponseEntity.ok(vendorService.addAllVendors(vendors));
-    }
-
-
     @PutMapping("/{vendorId}")
     public ResponseEntity<Vendor> updateVendor(@PathVariable Long vendorId, @RequestBody Vendor vendor) throws VendorNotFoundException {
         Vendor updatedVendor = vendorService.updateVendor(vendorId, vendor);
@@ -61,7 +54,6 @@ public class VendorController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Vendor>> getAllVendors() {
-
         return ResponseEntity.ok(vendorService.getAllVendors());
     }
 }

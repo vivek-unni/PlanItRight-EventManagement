@@ -32,13 +32,38 @@ public class GuestController {
     }
 
     @GetMapping("/{eventId}/all")
-    public List<Guest> getAllGuestsFromEvent(@PathVariable Long eventId) throws ResourceNotFoundException {
+    public List<Guest> getAllGuestsByEventId(@PathVariable Long eventId) throws ResourceNotFoundException {
         return guestService.getAllGuestsFromEvent(eventId);
     }
+
+    @PutMapping("/{eventId}/{email}/rsvpStatus")
+    public Guest updateRsvpStatus(
+            @PathVariable Long eventId,
+            @PathVariable String email,
+            @RequestParam String rsvpStatus) throws ResourceNotFoundException {
+        return guestService.updateRsvpStatus(eventId, email, rsvpStatus);
+    }
+
+    @PutMapping("/{guestId}/rsvpStatus")
+    public Guest updateRsvpStatus(
+            @PathVariable Long guestId,
+            @RequestParam String rsvpStatus) throws ResourceNotFoundException {
+        return guestService.updateRsvp(guestId, rsvpStatus);
+    }
+
+
 
 //    @PutMapping("/{eventId}/{email}")
 //    public ResponseEntity<Guest> updateGuestRsvpStatus(@PathVariable Long eventId, @PathVariable String email, @RequestBody String rsvpStatus) throws ResourceNotFoundException {
 //        Guest updatedGuest = guestService.updateRsvpStatus(eventId, email, rsvpStatus);
 //        return ResponseEntity.ok(updatedGuest);
+//    }
+
+//    @PutMapping("/{eventId}/{email}/update-rsvp")
+//    public String updateRsvpStatus(
+//            @PathVariable Long eventId,
+//            @PathVariable String email,
+//            @RequestParam String rsvpStatus) {
+//        return guestService.updateRsvpStatus(eventId, email, rsvpStatus);
 //    }
 }

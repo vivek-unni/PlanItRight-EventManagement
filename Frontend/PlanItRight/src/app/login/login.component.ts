@@ -2,9 +2,9 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
+import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
- 
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -13,25 +13,54 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css']  // Corrected to 'styleUrls' for array
 })
 export class LoginComponent {
-  // , { queryParams: { username: this.loginData.username } }
- 
-  loginData = { email: '', password: '' };
-  loginError: string | null = null;
-  isAuthenticated: boolean = false;
-  constructor(private authService: AuthService, private router: Router) {}
- 
-  login() {
-    this.authService.login(this.loginData).subscribe(
-      () => {
-        // Navigate to the dashboard after successful login
-        console.log("HIi")
-        localStorage.setItem('email', this.loginData.email);
-        this.isAuthenticated = true;
-        this.router.navigate(['events']);
+
+  email: string = "";
+  password: string = "";
+
+  constructor(private loginService: LoginService, private router: Router) {}
+
+  print() {
+    // Update auth object with the latest values of email and password
+    const auth = {
+      username: this.email,
+      password: this.password
+    };
+    
+    console.log(auth.username + ' ' + auth.password);
+    this.loadToken(auth);
+  }
+
+  token: string | null = null;
+
+  loadToken(auth: { username: string; password: string }) {
+    this.loginService.getToken(auth).subscribe(
+      (data) => {
+        console.log("Data  "+data.token)
+        console.log('Auth data:', auth);  // Logging the auth object
+        this.token = data.token;
+        console.log("Token" +this.token);
+        this.sendAuthRequest();
       },
-      error => {
-        console.error('Login failed:', error);
-        this.loginError = 'Invalid username or password';
+      (error: any) => {
+        console.error('Error Fetching', error);
+        this.token = "Error";
+      }
+    );
+  }
+
+  sendAuthRequest() {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.token
+    });
+
+    const url = 'http://localhost:7000/api/login';
+    this.loginService.sendAuthenticatedRequest(url, headers).subscribe(
+      (data) => {
+        console.log('Authenticated Request Successful:', data);
+        this.router.navigate(['home']);
+      },
+      (error: any) => {
+        console.error('Authenticated Request Failed:', error);
       }
     );
   }

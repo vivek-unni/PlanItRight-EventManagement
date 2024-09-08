@@ -18,7 +18,7 @@ import { AuthService } from '../../auth.service';
 export class EventsComponent implements OnInit {
 
 
-  email = localStorage.getItem('email');
+  username = localStorage.getItem('username');
 
   create_icon: string = '/assets/icons8-create-90.png';
   calender_icon: string = '/assets/icons8-calender-100.png';
@@ -49,7 +49,7 @@ export class EventsComponent implements OnInit {
 
   async load() {
     try {
-      const data = await lastValueFrom(this.eventService.fetchEventsByEmail(this.email));
+      const data = await lastValueFrom(this.eventService.fetchEventsByUsername(this.username));
       this.eventData = data ?? [];
       console.log(data)
        // Default to an empty array if data is undefined

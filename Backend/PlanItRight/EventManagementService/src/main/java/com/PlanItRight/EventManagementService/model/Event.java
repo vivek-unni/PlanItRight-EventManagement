@@ -26,7 +26,7 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long eventId;
-    private String email;
+    private String username;
     private String name;
     private String description;
     private Date date;
@@ -34,16 +34,10 @@ public class Event {
     private String type;
     private Long budget;
 
-    //    private String username;
-
 
     @OneToMany
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "event_id")
     private List<com.PlanItRight.EventManagementService.model.Task> tasks;
 
-    @OneToMany
-    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-    @JoinColumn(name = "event_id")
-    private List<com.PlanItRight.EventManagementService.model.Guest> guests;
 }

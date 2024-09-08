@@ -21,6 +21,6 @@ export const routes: Routes = [
     // { path: '**', redirectTo: '/home' },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
-    { path: 'rsvp', component: RsvpComponent },
+    // { path: 'rsvp', component: RsvpComponent },
     {path : 'signup',component:RegistrationComponent}
 ];

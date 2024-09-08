@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { EventNavComponent } from "../event-nav/event-nav.component";
 import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
@@ -17,6 +17,7 @@ export class GuestlistComponent implements OnInit {
 
   eventIdget = localStorage.getItem('eventId');
   eventId = Number(this.eventIdget);
+
 
   guests: GuestModel[] = [];
   acceptedGuests: GuestModel[] = [];
